@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>India ride-hailing — GBV to 2030</title>
+<meta name="description" content="A bottom-up build of India's ride-hailing market to 2030. Population to penetration to frequency to fare. Move the drivers and watch the number move.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  color-scheme:light;
+  --void:#F1EBDF;--void-2:#E9E2D3;--void-3:#E2D9C7;--accent:#385A49;--gold:#D9B26A;--ink:#111110;--cream:#F1EBDF;
+ --text:#111110;--text-soft:#5E5A50;--line:#D3C9B5;
+ --font-display:"Archivo Black","Arial Black",sans-serif;--font-serif:"Instrument Serif",Georgia,serif;--font-body:"Inter",system-ui,sans-serif;
+ --font-data:"JetBrains Mono",ui-monospace,monospace;
+  --ease:cubic-bezier(.22,.7,.26,1);
+  --dots:radial-gradient(circle at 1px 1px,rgba(17,17,16,.09) 1px,transparent 0);
+}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--text);font-family:var(--font-body);line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:72rem;margin:0 auto;padding-inline:max(1.25rem,env(safe-area-inset-left,0px))}
+.band{padding-block:clamp(2.6rem,7vw,4.4rem);border-bottom:1px solid var(--line)}
+.band--raised{background:var(--void-2)}
+.band--dots{background-image:var(--dots);background-size:22px 22px}
+h1,h2,h3{font-family:var(--font-display);font-variation-settings:"wdth" 118,"wght" 800;letter-spacing:-0.035em;line-height:1.02}
+h1{font-size:clamp(2.3rem,6.4vw,4.4rem)}
+h2{font-size:clamp(1.6rem,3.6vw,2.4rem)}
+h3{font-size:1.05rem;font-variation-settings:"wdth" 112,"wght" 700;letter-spacing:-0.015em}
+.eyebrow{font-family:var(--font-data);font-weight:500;font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-soft)}
+.lede{color:var(--text-soft);font-size:clamp(1rem,2vw,1.12rem);max-width:60ch}
+.acc{color:var(--accent)}
+a{color:var(--accent)}
+.back{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--font-data);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;color:var(--text-soft)}
+.back:hover{color:var(--accent)}
+.pill{display:inline-block;font-family:var(--font-data);font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.34rem 0.7rem;border:1px solid var(--line);border-radius:999px;color:var(--text-soft)}
+.pill--on{border-color:var(--accent);color:var(--accent)}
+.tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1.5rem}
+
+/* chain */
+.chain{display:grid;gap:0.7rem;grid-template-columns:1fr;margin-top:2.4rem}
+@media(min-width:52rem){.chain{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.link{border:1px solid var(--line);border-radius:10px;padding:0.9rem;background:var(--void-2);min-width:0}
+.link .k{font-family:var(--font-data);font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent)}
+.link .v{font-weight:600;font-size:0.92rem;margin-top:0.3rem;line-height:1.3}
+.link .n{font-family:var(--font-data);font-size:0.72rem;color:var(--text-soft);margin-top:0.35rem}
+
+/* model */
+.model{display:grid;gap:1.5rem;grid-template-columns:1fr;margin-top:2.4rem}
+@media(min-width:60rem){.model{grid-template-columns:22rem 1fr;align-items:start}}
+.controls{border:1px solid var(--line);border-radius:14px;padding:1.3rem;background:var(--void-2);display:flex;flex-direction:column;gap:1.15rem;min-width:0}
+.ctrl label{display:block;font-family:var(--font-data);font-size:0.64rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-soft)}
+.ctrl .val{font-family:var(--font-display);font-variation-settings:"wdth" 116,"wght" 800;font-size:1.5rem;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;display:block;margin-block:0.25rem 0.45rem;color:var(--accent)}
+.ctrl .base{font-family:var(--font-data);font-size:0.62rem;color:#7A7466;margin-top:0.3rem;display:block}
+input[type=range]{width:100%;accent-color:var(--accent)}
+input[type=range]:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.reset{align-self:flex-start;font-family:var(--font-data);font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;background:transparent;color:var(--text-soft);border:1px solid var(--line);border-radius:999px;padding:0.45rem 0.9rem;cursor:pointer;transition:all 180ms var(--ease)}
+.reset:hover{border-color:var(--accent);color:var(--accent)}
+
+.out{display:flex;flex-direction:column;gap:1.4rem;min-width:0}
+.heads{display:grid;gap:0.8rem;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(min-width:44rem){.heads{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.head{border:1px solid var(--line);border-radius:12px;padding:0.95rem;background:var(--void-2);min-width:0}
+.head .k{font-family:var(--font-data);font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-soft)}
+.head .v{font-family:var(--font-display);font-variation-settings:"wdth" 118,"wght" 850;font-size:clamp(1.5rem,3.6vw,2rem);letter-spacing:-0.035em;font-variant-numeric:tabular-nums;margin-top:0.35rem;line-height:1}
+.head .s{font-family:var(--font-data);font-size:0.64rem;color:var(--text-soft);margin-top:0.35rem}
+.head--hero{border-color:var(--accent)}
+.head--hero .v{color:var(--accent)}
+
+.chartbox{border:1px solid var(--line);border-radius:14px;padding:1.2rem;background:var(--void-2);min-width:0}
+.chartbox .cap{display:flex;flex-wrap:wrap;gap:0.9rem;align-items:baseline;justify-content:space-between;margin-bottom:1rem}
+.legend{display:flex;flex-wrap:wrap;gap:0.8rem;font-family:var(--font-data);font-size:0.64rem;color:var(--text-soft)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:0.35rem;vertical-align:-1px}
+svg{display:block;width:100%;height:auto;overflow:visible}
+.tabs{display:flex;gap:0.4rem;flex-wrap:wrap}
+.tab{font-family:var(--font-data);font-size:0.64rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.4rem 0.75rem;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--text-soft);cursor:pointer;transition:all 180ms var(--ease)}
+.tab[aria-pressed="true"]{background:var(--accent);color:var(--cream);border-color:var(--accent)}
+
+/* split rows */
+.splits{display:grid;gap:1.2rem;grid-template-columns:1fr}
+@media(min-width:44rem){.splits{grid-template-columns:1fr 1fr}}
+.bars{display:flex;flex-direction:column;gap:0.85rem}
+.bar .top{display:flex;justify-content:space-between;align-items:baseline;gap:0.8rem;margin-bottom:0.3rem}
+.bar .name{font-size:0.92rem;font-weight:500}
+.bar .fig{font-family:var(--font-data);font-size:0.72rem;color:var(--text-soft);font-variant-numeric:tabular-nums}
+.track{height:1.5rem;background:var(--void-3);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.fill{height:100%;transition:width 320ms var(--ease)}
+
+/* calibration */
+.calib{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:1.2rem;background:var(--void-2)}
+.calib table{width:100%;border-collapse:collapse;margin-top:0.9rem;font-family:var(--font-data);font-size:0.78rem}
+.calib th{text-align:left;font-weight:500;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-soft);padding-bottom:0.5rem;border-bottom:1px solid var(--line)}
+.calib td{padding-block:0.55rem;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.calib td:not(:first-child),.calib th:not(:first-child){text-align:right}
+.ok{color:#2F6B47}
+
+/* assumption table */
+.asm{width:100%;border-collapse:collapse;margin-top:1.6rem;font-size:0.9rem}
+.asm th{text-align:left;font-family:var(--font-data);font-weight:500;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-soft);padding-bottom:0.6rem;border-bottom:1px solid var(--line)}
+.asm td{padding-block:0.75rem;border-bottom:1px solid var(--line);vertical-align:top}
+.asm td:nth-child(1),.asm th:nth-child(1){padding-right:1.2rem}
+.asm td:nth-child(2),.asm th:nth-child(2){padding-right:1.8rem}
+.asm td:nth-child(2){font-family:var(--font-data);font-size:0.8rem;white-space:nowrap;color:var(--accent);font-variant-numeric:tabular-nums}
+.asm td:nth-child(3){color:var(--text-soft);font-size:0.86rem}
+/* ---------- disclosure ---------- */
+.disc{border:1px solid var(--line);border-radius:12px;background:var(--void);margin-top:1.2rem}
+.disc>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.1rem 1.3rem;font-family:var(--font-display);font-variation-settings:"wdth" 114,"wght" 750;letter-spacing:-0.02em;font-size:clamp(1.1rem,2.4vw,1.4rem)}
+.disc>summary::-webkit-details-marker{display:none}
+.disc>summary::after{content:"";flex:0 0 auto;width:9px;height:9px;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(45deg) translateY(-2px);transition:transform 220ms var(--ease)}
+.disc[open]>summary::after{transform:rotate(-135deg) translateY(-2px)}
+.disc>summary:hover{color:var(--accent)}
+.disc>summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:12px}
+.disc__hint{font-family:var(--font-data);font-size:0.64rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-soft);margin-left:auto;margin-right:0.8rem}
+.disc .asm{margin:0 1.3rem 1.4rem}
+.disc .asm th{padding-top:0}
+.disc .asm tr:last-child td{border-bottom:none}
+
+@media(max-width:44rem){.asm td:nth-child(3),.asm th:nth-child(3){display:none}}
+
+/* ai */
+.ai{display:grid;gap:1.1rem;grid-template-columns:1fr;margin-top:2.2rem}
+@media(min-width:52rem){.ai{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.step{border-top:3px solid var(--accent);padding-top:1rem;min-width:0}
+.step:nth-child(2){border-color:var(--ink)}
+.step:nth-child(3){border-color:var(--gold)}
+.step .w{font-family:var(--font-data);font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-soft)}
+.step h3{margin-block:0.45rem 0.6rem}
+.step ul{list-style:none;display:flex;flex-direction:column;gap:0.4rem;font-size:0.9rem;color:var(--text-soft)}
+
+.note{font-family:var(--font-data);font-size:0.68rem;color:#7A7466;margin-top:1.4rem;line-height:1.6}
+footer{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;padding-block:2rem;font-family:var(--font-data);font-size:0.68rem;color:var(--text-soft)}
+
+/* ===== Editorial restyle — matches the intro video ===== */
+h1,h2,h3{font-family:var(--font-display);font-variation-settings:normal;font-weight:400;text-transform:uppercase;letter-spacing:-0.02em;line-height:0.98}
+h1 span,h2 span,h3 span{font-family:var(--font-serif);font-style:italic;text-transform:none;letter-spacing:0;color:var(--accent)}
+.lede{font-family:var(--font-serif);font-size:clamp(1.3rem,2.2vw,1.6rem);line-height:1.28;color:var(--text)}
+.pill,.tab,.reset{border-radius:6px}
+.tab[aria-pressed="true"]{color:var(--cream)}
+.back:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<div class="band band--dots">
+  <div class="wrap">
+    <a class="back" href="index.html">&larr; Back to the work</a>
+    <p class="eyebrow" style="margin-top:1.6rem">Market sizing &middot; Built with AI</p>
+    <h1 style="margin-top:0.7rem;max-width:16ch">India ride-hailing, built from the bottom up</h1>
+    <p class="lede" style="margin-top:1.5rem">
+      A bottom-up build of the 2030 fare pool across three city tiers and three vehicle
+      categories, checked against published 2025 actuals.
+    </p>
+    <div class="tags">
+      <span class="pill pill--on">Live model</span>
+      <span class="pill">CY2025 &rarr; CY2030</span>
+      <span class="pill">Bottom-up</span>
+      <span class="pill">Calibrated to published actuals</span>
+    </div>
+  </div>
+</div>
+
+<div class="band">
+  <div class="wrap">
+    <p class="eyebrow">The chain</p>
+    <h2 style="margin-top:0.6rem;max-width:22ch">How the number is built</h2>
+    <div class="chain">
+      <div class="link"><span class="k">01</span><p class="v">Urban population, by tier</p><p class="n" id="c1">&mdash;</p></div>
+      <div class="link"><span class="k">02</span><p class="v">&times; Penetration</p><p class="n" id="c2">&mdash;</p></div>
+      <div class="link"><span class="k">03</span><p class="v">&times; Rides per user</p><p class="n" id="c3">&mdash;</p></div>
+      <div class="link"><span class="k">04</span><p class="v">&times; Category mix</p><p class="n" id="c4">&mdash;</p></div>
+      <div class="link"><span class="k">05</span><p class="v">&times; Fare per ride</p><p class="n" id="c5">&mdash;</p></div>
+    </div>
+    <p class="note">Tiers: Metro-8 &middot; Tier-1 (other million-plus urban agglomerations) &middot; Tier-2+ (all other urban India). Categories: cab, auto, bike taxi.</p>
+  </div>
+</div>
+
+<div class="band band--raised">
+  <div class="wrap">
+    <p class="eyebrow">Try it yourself</p>
+    <h2 style="margin-top:0.6rem;max-width:24ch">The growth is not in the metros</h2>
+    <p class="lede" style="margin-top:1.2rem">Move the 2030 drivers. Everything downstream recomputes, including the mix.</p>
+
+    <div class="model">
+      <div class="controls">
+        <div class="ctrl">
+          <label for="pm">Metro penetration, 2030</label>
+          <span class="val" id="pmv">34%</span>
+          <input type="range" id="pm" min="25" max="45" step="1" value="34">
+          <span class="base">of tier population transacting monthly &middot; 25% today</span>
+        </div>
+        <div class="ctrl">
+          <label for="p1">Tier-1 penetration, 2030</label>
+          <span class="val" id="p1v">26%</span>
+          <input type="range" id="p1" min="16" max="40" step="1" value="26">
+          <span class="base">16% today</span>
+        </div>
+        <div class="ctrl">
+          <label for="p2">Tier-2+ penetration, 2030</label>
+          <span class="val" id="p2v">15%</span>
+          <input type="range" id="p2" min="7" max="30" step="1" value="15">
+          <span class="base">7% today</span>
+        </div>
+        <div class="ctrl">
+          <label for="fq">Metro frequency, 2030</label>
+          <span class="val" id="fqv">5.0</span>
+          <input type="range" id="fq" min="43" max="70" step="1" value="50">
+          <span class="base">rides per user per month &middot; 4.3 today. Tiers scale off this.</span>
+        </div>
+        <div class="ctrl">
+          <label for="av">Fare inflation</label>
+          <span class="val" id="avv">as modelled</span>
+          <input type="range" id="av" min="-20" max="20" step="5" value="0">
+          <span class="base">shift to the 4&ndash;5% p.a. base case</span>
+        </div>
+        <button class="reset" type="button" id="reset">Reset to base case</button>
+      </div>
+
+      <div class="out">
+        <div class="heads">
+          <div class="head head--hero"><span class="k">GBV 2030</span><p class="v" id="hGbv">&mdash;</p><p class="s" id="hGbvInr">&mdash;</p></div>
+          <div class="head"><span class="k">CAGR 25&ndash;30</span><p class="v" id="hCagr">&mdash;</p><p class="s">on 2025 GBV</p></div>
+          <div class="head"><span class="k">Rides / day</span><p class="v" id="hRides">&mdash;</p><p class="s" id="hRidesY">&mdash;</p></div>
+          <div class="head"><span class="k">Blended fare</span><p class="v" id="hAov">&mdash;</p><p class="s" id="hMtu">&mdash;</p></div>
+        </div>
+
+        <div class="chartbox">
+          <div class="cap">
+            <div class="tabs">
+              <button class="tab" type="button" data-v="tier" aria-pressed="true">By city tier</button>
+              <button class="tab" type="button" data-v="cat" aria-pressed="false">By category</button>
+            </div>
+            <div class="legend" id="legend"></div>
+          </div>
+          <svg id="chart" viewBox="0 0 1000 300" role="img" aria-label="Gross booking value by year, stacked"></svg>
+        </div>
+
+        <div class="splits">
+          <div>
+            <p class="eyebrow">Where the 2030 fare pool sits</p>
+            <div class="bars" id="tierBars" style="margin-top:0.9rem"></div>
+          </div>
+          <div>
+            <p class="eyebrow">What people are riding</p>
+            <div class="bars" id="catBars" style="margin-top:0.9rem"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="band band--raised">
+  <div class="wrap">
+    <p class="eyebrow">Where the numbers come from</p>
+    <details class="disc">
+      <summary><span>Assumptions and sources</span><span class="disc__hint">9 drivers</span></summary>
+    <table class="asm">
+      <thead><tr><th>Driver</th><th>2025 &rarr; 2030</th><th>Basis</th></tr></thead>
+      <tbody>
+        <tr><td>Urban population</td><td>526 &rarr; 612 mn</td><td>UNFPA and World Bank urban share, applied to total population.</td></tr>
+        <tr><td>Metro-8 penetration</td><td>25% &rarr; 34%</td><td>Solved jointly with frequency against 3 bn trips and Delhi NCR's 16&ndash;18% contribution. Equals 49% of smartphone-owning adults today, converging to a ~52% ceiling.</td></tr>
+        <tr><td>Tier-1 penetration</td><td>16% &rarr; 26%</td><td>Same solve. 37% of smartphone-owning adults today.</td></tr>
+        <tr><td>Tier-2+ penetration</td><td>7% &rarr; 15%</td><td>20% of smartphone-owning adults today. Driven by the consuming class, smartphones, zero-commission supply and bike-taxi legalisation.</td></tr>
+        <tr><td>Metro frequency</td><td>4.3 &rarr; 5.0 / month</td><td>Anchored on Rapido's disclosed 4.06 rides per transacting user (207 mn rides &divide; 17 mn users, Q2 FY25), adjusted up for its bike and auto skew. No assumption of primary-mode substitution.</td></tr>
+        <tr><td>Cab fare</td><td>&#8377;300&ndash;420, +4% p.a.</td><td>Regulated tariffs of &#8377;21&ndash;32/km across Karnataka and Pune, over a 13&ndash;15 km average trip, plus the airport and rental mix that skews metros up.</td></tr>
+        <tr><td>Auto fare</td><td>&#8377;95&ndash;135, +5% p.a.</td><td>Bengaluru meter of &#8377;36 base plus &#8377;18/km; app fares run 20&ndash;30% over meter on a 5&ndash;6 km trip.</td></tr>
+        <tr><td>Bike-taxi fare</td><td>&#8377;55&ndash;78, +5% p.a.</td><td>Maharashtra notified tariff of &#8377;15 base plus &#8377;10.27/km over a 5&ndash;7 km trip.</td></tr>
+        <tr><td>Category mix</td><td>Bike taxi 28% &rarr; 34% of rides</td><td>Cabs over-index in metros &mdash; 45% of Delhi NCR trips against 27% nationally. Bike taxi is the share gainer everywhere outside them.</td></tr>
+      </tbody>
+    </table>
+    </details>
+  </div>
+</div>
+
+<div class="wrap"><footer><span>Sheryl Lazer</span><a href="index.html">See the rest of the work &rarr;</a></footer></div>
+
+<script>
+(function(){
+  "use strict";
+  var YRS=[2025,2026,2027,2028,2029,2030], N=6;
+  var POP={metro:[120,130],t1:[110,120],t2:[295.6,362]};
+  var PEN0={metro:.25,t1:.16,t2:.07};
+  var FQ0={metro:4.3,t1:3.44,t2:3.01};
+  var FQR30={metro:1,t1:.84,t2:.72};
+  var MIX={                       // [CY25, CY30] share of that tier's rides
+    metro:{cab:[.38,.33],auto:[.42,.43],bike:[.20,.24]},
+    t1:   {cab:[.18,.15],auto:[.48,.47],bike:[.34,.38]},
+    t2:   {cab:[.12,.10],auto:[.48,.46],bike:[.40,.44]}
+  };
+  var AOV0={metro:{cab:420,auto:135,bike:78},t1:{cab:340,auto:110,bike:62},t2:{cab:300,auto:95,bike:55}};
+  var G0={cab:.04,auto:.05,bike:.05};
+  var FX=87, TIERS=["metro","t1","t2"], CATS=["cab","auto","bike"];
+  var TLAB={metro:"Metro-8",t1:"Tier-1",t2:"Tier-2+"};
+  var CLAB={cab:"Cab",auto:"Auto",bike:"Bike taxi"};
+  var TCOL={metro:"#385A49",t1:"#111110",t2:"#B9AF9C"};
+  var CCOL={cab:"#385A49",auto:"#111110",bike:"#B9AF9C"};
+
+  function lerp(a,b,i){ return a + (b-a) * (i/(N-1)); }
+
+  function build(o){
+    var out={years:YRS,tier:{},cat:{},total:[],rides:[],mtu:[],aov:[]};
+    TIERS.forEach(function(t){ out.tier[t]=[]; });
+    CATS.forEach(function(c){ out.cat[c]=[]; });
+    var pen30={metro:o.pm,t1:o.p1,t2:o.p2};
+    for(var i=0;i<N;i++){
+      var tot=0, rides=0, mtu=0;
+      var catY={cab:0,auto:0,bike:0};
+      TIERS.forEach(function(t){
+        var pop  = lerp(POP[t][0],POP[t][1],i);
+        var pen  = lerp(PEN0[t],pen30[t],i);
+        var u    = pop*pen;
+        var fq   = lerp(FQ0[t], o.fq*FQR30[t], i);
+        var r    = u*fq*12;                       // mn rides p.a.
+        var tv   = 0;
+        CATS.forEach(function(c){
+          var sh  = lerp(MIX[t][c][0],MIX[t][c][1],i);
+          var aov = AOV0[t][c]*Math.pow(1+G0[c]+o.dg,i);
+          var v   = r*sh*aov/10;                  // Rs crore
+          tv+=v; catY[c]+=v;
+        });
+        out.tier[t].push(tv); tot+=tv; rides+=r; mtu+=u;
+      });
+      CATS.forEach(function(c){ out.cat[c].push(catY[c]); });
+      out.total.push(tot); out.rides.push(rides); out.mtu.push(mtu);
+      out.aov.push(tot*10/rides);
+    }
+    return out;
+  }
+
+  function fmt(n,d){ return n.toLocaleString("en-IN",{minimumFractionDigits:d,maximumFractionDigits:d}); }
+  function pct(n){ return (n*100).toFixed(1)+"%"; }
+
+  var view="tier";
+  var els={};
+  ["pm","p1","p2","fq","av","pmv","p1v","p2v","fqv","avv","hGbv","hGbvInr","hCagr","hRides","hRidesY","hAov","hMtu","chart","legend","tierBars","catBars","c1","c2","c3","c4","c5"]
+    .forEach(function(id){ els[id]=document.getElementById(id); });
+
+  function readOpts(){
+    return {
+      pm:+els.pm.value/100, p1:+els.p1.value/100, p2:+els.p2.value/100,
+      fq:+els.fq.value/10,  dg:+els.av.value/1000
+    };
+  }
+
+  function drawChart(d){
+    var series = view==="tier" ? TIERS : CATS;
+    var src    = view==="tier" ? d.tier : d.cat;
+    var col    = view==="tier" ? TCOL : CCOL;
+    var lab    = view==="tier" ? TLAB : CLAB;
+    var W=1000,H=300,padB=30,padT=14;
+    var max=Math.max.apply(null,d.total)*1.04;
+    var gap=26, bw=(W-(N-1)*gap)/N;
+    var svg="";
+    for(var i=0;i<N;i++){
+      var x=i*(bw+gap), y=H-padB, acc=0;
+      var segs=[];
+      for(var s=0;s<series.length;s++){
+        var v=src[series[s]][i];
+        var h=(v/max)*(H-padB-padT);
+        y-=h;
+        svg+='<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+Math.max(h,0).toFixed(1)+'" fill="'+col[series[s]]+'" opacity="'+(s===0?1:(s===1?.8:.55))+'"><title>'+lab[series[s]]+" "+YRS[i]+": ₹"+fmt(v,0)+' cr</title></rect>';
+        segs.push({k:series[s],v:v,y:y,h:h});
+        acc+=v;
+      }
+      // share labels, drawn after the bars so nothing paints over them
+      for(var s2=0;s2<segs.length;s2++){
+        var sg=segs[s2];
+        if(sg.h<13) continue;
+        var share=sg.v/d.total[i];
+        var fs=sg.h<22?12:15;
+        svg+='<text x="'+(x+bw/2).toFixed(1)+'" y="'+(sg.y+sg.h/2+fs/3).toFixed(1)+'" text-anchor="middle" fill="'+
+             (col[sg.k]==="#B9AF9C"?"#111110":"#F1EBDF")+'" font-family="JetBrains Mono,monospace" font-weight="500" font-size="'+fs+'" pointer-events="none">'+
+             (share*100).toFixed(0)+'%</text>';
+      }
+      svg+='<text x="'+(x+bw/2).toFixed(1)+'" y="'+(H-padB+18)+'" text-anchor="middle" fill="#5E5A50" font-family="JetBrains Mono,monospace" font-size="15">'+YRS[i]+'</text>';
+      svg+='<text x="'+(x+bw/2).toFixed(1)+'" y="'+(y-7).toFixed(1)+'" text-anchor="middle" fill="#111110" font-family="JetBrains Mono,monospace" font-size="15">$'+fmt(acc*10/FX/1000,1)+'b</text>';
+    }
+    els.chart.innerHTML=svg;
+    els.legend.innerHTML=series.map(function(s,i){
+      return '<span><i style="background:'+col[s]+';opacity:'+(i===0?1:(i===1?.8:.55))+'"></i>'+lab[s]+'</span>';
+    }).join("");
+  }
+
+  function drawBars(node,keys,src,col,lab,total){
+    node.innerHTML=keys.map(function(k){
+      var v=src[k][N-1], share=v/total;
+      return '<div class="bar"><div class="top"><span class="name">'+lab[k]+'</span>'+
+        '<span class="fig">₹'+fmt(v,0)+' cr &middot; '+pct(share)+'</span></div>'+
+        '<div class="track"><div class="fill" style="width:'+(share*100).toFixed(1)+'%;background:'+col[k]+'"></div></div></div>';
+    }).join("");
+  }
+
+  function render(){
+    var o=readOpts();
+    els.pmv.textContent=Math.round(o.pm*100)+"%";
+    els.p1v.textContent=Math.round(o.p1*100)+"%";
+    els.p2v.textContent=Math.round(o.p2*100)+"%";
+    els.fqv.textContent=o.fq.toFixed(1);
+    els.avv.textContent = o.dg===0 ? "as modelled" : (o.dg>0?"+":"−")+Math.abs(o.dg*100).toFixed(1)+"pp";
+
+    var d=build(o);
+    var g30=d.total[N-1], g25=d.total[0];
+    els.hGbv.textContent="$"+fmt(g30*10/FX/1000,1)+"b";
+    els.hGbvInr.textContent="₹"+fmt(g30,0)+" cr";
+    els.hCagr.textContent=pct(Math.pow(g30/g25,1/5)-1);
+    els.hRides.textContent=fmt(d.rides[N-1]/365,1)+"m";
+    els.hRidesY.textContent=fmt(d.rides[N-1]/1000,2)+" bn rides a year";
+    els.hAov.textContent="₹"+fmt(d.aov[N-1],0);
+    els.hMtu.textContent=fmt(d.mtu[N-1],0)+" mn monthly riders";
+
+    els.c1.textContent=fmt(POP.metro[1]+POP.t1[1]+POP.t2[1],0)+" mn urban, 2030";
+    els.c2.textContent=Math.round(o.pm*100)+" / "+Math.round(o.p1*100)+" / "+Math.round(o.p2*100)+"% by tier";
+    els.c3.textContent=o.fq.toFixed(1)+" a month in metros";
+    els.c4.textContent="bike taxi "+pct(ridesShare(d,"bike"))+" of rides";
+    els.c5.textContent="₹"+fmt(d.aov[N-1],0)+" blended";
+
+    drawChart(d);
+    drawBars(els.tierBars,TIERS,d.tier,TCOL,TLAB,g30);
+    drawBars(els.catBars,CATS,d.cat,CCOL,CLAB,g30);
+  }
+
+  // rides share of a category in the final year (needs the ride counts, not GBV)
+  function ridesShare(d,cat){
+    var o=readOpts(), i=N-1, num=0, den=0;
+    TIERS.forEach(function(t){
+      var pen30={metro:o.pm,t1:o.p1,t2:o.p2}[t];
+      var pop=POP[t][1], u=pop*pen30, r=u*(o.fq*FQR30[t])*12;
+      num+=r*MIX[t][cat][1]; den+=r;
+    });
+    return num/den;
+  }
+
+  ["pm","p1","p2","fq","av"].forEach(function(id){
+    els[id].addEventListener("input",render);
+  });
+  document.getElementById("reset").addEventListener("click",function(){
+    els.pm.value=34; els.p1.value=26; els.p2.value=15; els.fq.value=50; els.av.value=0; render();
+  });
+  Array.prototype.forEach.call(document.querySelectorAll(".tab"),function(t){
+    t.addEventListener("click",function(){
+      view=t.getAttribute("data-v");
+      Array.prototype.forEach.call(document.querySelectorAll(".tab"),function(x){
+        x.setAttribute("aria-pressed", x===t ? "true":"false");
+      });
+      render();
+    });
+  });
+  render();
+})();
+</script>
+</body>
+</html>

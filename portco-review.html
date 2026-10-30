@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PortCo — FY Apr'24–Mar'25 Review</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Archivo+Black&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#163227;--navy2:#1D3B2E;--navy3:#111110;
+  --orange:#D9B26A;--orange-l:rgba(217,178,106,.14);--orange-d:#A9843F;
+  --white:#FFFFFF;--off:#F1EBDF;--off2:#E9E2D3;
+  --border:#D3C9B5;--border2:#C2B79F;
+  --text:#111110;--text2:#3E3B34;--text3:#7A7466;
+  --green:#385A49;--green-l:rgba(56,90,73,.1);
+  --red:#a07272;--red-l:rgba(160,114,114,.1);
+  --amber:#9a8560;--amber-l:rgba(154,133,96,.1);
+  --purple:#7b7a96;
+  --shadow:0 1px 3px rgba(17,17,16,.08),0 4px 16px rgba(17,17,16,.06);
+  --shadow-lg:0 8px 32px rgba(17,17,16,.14);
+  --r:14px;--sans:'Inter',system-ui,sans-serif;--display:'Archivo Black','Arial Black',sans-serif;--mono:'JetBrains Mono',monospace;--serif:'Instrument Serif',Georgia,serif;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+@keyframes barGrow{from{width:0}to{width:var(--w)}}
+
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--off);color:var(--text);-webkit-font-smoothing:antialiased}
+
+/* ── HEADER ── */
+.header{background:var(--navy);padding:24px 40px 20px;display:flex;justify-content:space-between;align-items:flex-start;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(237,173,109,.15) 0%,transparent 70%);pointer-events:none}
+.h-eyebrow{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.h-dot{width:5px;height:5px;border-radius:50%;background:var(--orange);animation:pulse 2s infinite}
+.h-title{font-family:var(--serif);font-size:40px;font-style:italic;color:#fff;line-height:1;margin-bottom:10px}
+.h-tags{display:flex;gap:6px;flex-wrap:wrap}
+.h-tag{font-size:11px;font-weight:500;padding:4px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.22);color:rgba(255,255,255,.75)}
+.h-right{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.h-period{font-family:var(--serif);font-size:20px;font-style:italic;color:#fff}
+.h-status{display:flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,.45)}
+.h-sdot{width:6px;height:6px;border-radius:50%;background:#7aab8a;box-shadow:0 0 4px #7aab8a;animation:pulse 2s infinite}
+
+/* ── STICKY CONTROLS BAR ── */
+.ctrl-bar{background:var(--navy2);border-bottom:2px solid var(--navy3);padding:0 40px;display:flex;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(17,17,16,.2);gap:0;flex-wrap:nowrap}
+
+/* Jump links */
+.jump-links{display:flex;gap:0}
+.jump-link{padding:13px 20px;font-size:11px;font-weight:500;color:rgba(255,255,255,.4);cursor:pointer;border-bottom:2px solid transparent;transition:.2s;letter-spacing:.02em;margin-bottom:-2px;text-decoration:none;display:block}
+.jump-link:hover{color:rgba(255,255,255,.75)}
+.jump-link.active{color:#fff;border-bottom-color:var(--orange)}
+
+.ctrl-divider{width:1px;height:28px;background:rgba(255,255,255,.1);margin:0 14px;flex-shrink:0}
+
+/* Period toggle */
+.period-wrap{display:flex;align-items:center;gap:7px}
+.period-lbl{font-size:9px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.period-toggle{display:flex;gap:2px;background:rgba(0,0,0,.18);border-radius:12px;padding:2px}
+.p-btn{padding:4px 11px;font-size:10px;font-weight:600;border-radius:10px;cursor:pointer;transition:.15s;color:rgba(255,255,255,.45);border:none;background:transparent;letter-spacing:.03em}
+.p-btn.on{background:var(--navy);color:#fff;box-shadow:0 1px 4px rgba(0,0,0,.3)}
+
+/* Currency toggle */
+.fx-wrap{display:flex;align-items:center;gap:7px;padding:4px 10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:20px}
+.fx-lbl{font-size:9px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.fx-toggle{display:flex;gap:2px;background:rgba(0,0,0,.15);border-radius:12px;padding:2px}
+.fx-btn{padding:4px 10px;font-size:10px;font-weight:600;border-radius:10px;cursor:pointer;transition:.15s;color:rgba(255,255,255,.45);border:none;background:transparent;letter-spacing:.03em}
+.fx-btn.on{background:var(--orange);color:#fff;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.fx-rate-wrap{display:none;align-items:center;gap:4px}
+.fx-rate-lbl{font-size:8.5px;color:rgba(255,255,255,.35)}
+.fx-rate-input{width:48px;font-size:10px;font-weight:600;color:rgba(255,255,255,.7);background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.25);outline:none;text-align:center;font-family:var(--sans);padding:1px 2px}
+.fx-rate-input:focus{border-bottom-color:var(--orange)}
+
+.ctrl-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.upload-btn{cursor:pointer;display:flex;align-items:center;gap:6px;font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.4);padding:5px 12px;border:1px solid rgba(255,255,255,.15);border-radius:20px;background:transparent;transition:all .2s}
+.upload-btn:hover{border-color:var(--orange);color:var(--orange)}
+#csvStatus{font-size:10px;color:var(--green);font-weight:600;opacity:0;transition:opacity .3s}
+
+/* ── ONE-PAGE WRAPPER ── */
+.page{max-width:1200px;margin:0 auto;padding:36px 40px 80px}
+
+/* ── SECTION ANCHORS ── */
+.page-section{margin-bottom:60px}
+.page-section:last-child{margin-bottom:0}
+.sec-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.sec-num{width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sec-title{font-family:var(--serif);font-size:22px;font-style:italic;color:var(--text)}
+.sec-line{flex:1;height:1px;background:var(--border)}
+.s-sub{font-size:9.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;margin-top:28px;display:flex;align-items:center;gap:8px}
+.s-sub:first-of-type{margin-top:0}
+.s-sub::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── CARDS ── */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.bdg{font-size:8px;font-weight:700;padding:2px 6px;border-radius:4px;letter-spacing:.02em}
+.bg{background:var(--green-l);color:var(--green)}.br{background:var(--red-l);color:var(--red)}
+.bn{background:var(--off2);color:var(--text3)}.bam{background:var(--amber-l);color:var(--amber)}
+
+/* ── CHART CARDS ── */
+.ind-charts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px}
+.chart-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:18px 20px;box-shadow:var(--shadow);transition:transform .2s;border-top:3px solid transparent}
+.chart-card:hover{transform:translateY(-2px)}
+.cc-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2px}
+.cc-title{font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3)}
+.cc-live{font-family:var(--serif);font-size:22px;color:var(--text);transition:all .1s}
+.cc-hint{font-size:8px;color:var(--text3);margin-bottom:9px;font-style:italic}
+.chart-wrap{position:relative;cursor:crosshair}
+.chart-wrap svg{width:100%;height:100%;overflow:visible;display:block}
+.cc-footer{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid var(--off2)}
+.cc-foot-lbl{font-size:7.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text3);margin-bottom:2px}
+.cc-foot-val{font-size:11px;color:var(--text2);font-weight:500}
+
+/* ── TOOLTIP ── */
+.tooltip{position:absolute;background:var(--navy);border:1px solid var(--navy2);color:#fff;border-radius:10px;padding:10px 14px;font-size:10px;pointer-events:none;opacity:0;transition:opacity .1s;z-index:50;white-space:nowrap;box-shadow:var(--shadow-lg);min-width:120px}
+.tt-month{font-size:8px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:5px}
+.tt-row{display:flex;justify-content:space-between;gap:12px;margin-bottom:2px}
+.tt-lbl{font-size:9px;color:rgba(255,255,255,.55)}
+.tt-val{font-family:var(--serif);font-size:14px;color:#fff}
+.tt-delta{font-size:8.5px;font-weight:600;padding:2px 6px;border-radius:4px;margin-top:3px;display:inline-block}
+
+/* ── RUNWAY ── */
+.runway-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:22px 26px;box-shadow:var(--shadow)}
+.rw-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.rw-title{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--text)}
+.rw-stats{display:flex;gap:24px}
+.rw-stat-lbl{font-size:8px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:3px}
+.rw-stat-val{font-size:17px;font-weight:600;font-family:var(--serif);color:var(--text)}
+.rw-stat-val.warn{color:var(--amber)}
+.rw-bar-track{height:8px;background:var(--off2);border-radius:99px;overflow:hidden;margin-bottom:7px}
+.rw-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--amber),#b09878);width:78%}
+.rw-bar-labels{display:flex;justify-content:space-between;font-size:8.5px;color:var(--text3)}
+.rw-hist{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:18px;padding-top:18px;border-top:1px solid var(--off2)}
+.rw-hist-item{display:flex;flex-direction:column;align-items:center;gap:5px}
+.rw-hist-bar-wrap{width:100%;height:56px;display:flex;align-items:flex-end}
+.rw-hist-bar-fill{width:100%;border-radius:5px 5px 0 0}
+.rw-hist-lbl{font-size:8.5px;color:var(--text3);text-align:center}
+.rw-hist-val{font-size:10px;font-weight:600;color:var(--text2)}
+
+/* ── KPI CARDS ── */
+.kpi-grid-2x2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.kpi-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow);transition:transform .2s;border-top:3px solid transparent}
+.kpi-card:hover{transform:translateY(-2px)}
+.kpi-lbl{font-size:9px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--text3);margin-bottom:5px}
+.kpi-main{font-family:var(--serif);font-size:28px;line-height:1;margin-bottom:2px;color:var(--text);transition:all .1s}
+.kpi-unit{font-size:12px;color:var(--text3)}
+.kpi-chart-wrap{position:relative;cursor:crosshair}
+.kpi-chart-wrap svg{width:100%;height:100%;overflow:visible;display:block}
+.kpi-desc{font-size:10.5px;line-height:1.5;color:var(--text3);margin-top:6px;padding-top:6px;border-top:1px solid var(--off2)}
+
+
+
+/* ── INSIGHTS ── */
+.perf-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.perf-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow)}
+.perf-card-header{display:flex;align-items:center;gap:8px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--off2)}
+.pch-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.pch-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.perf-ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.perf-ul li{display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.65;color:var(--text2)}
+.li-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.perf-ul li b{color:var(--text);font-weight:600}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--off)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<div class="header">
+  <div>
+    <div class="h-eyebrow"><span class="h-dot"></span>IIAF II · Portfolio Review</div>
+    <div class="h-title">PortCo</div>
+    <div class="h-tags">
+      <span class="h-tag">🇮🇳 India</span>
+      <span class="h-tag">Healthcare</span>
+      <span class="h-tag">Invested 2022</span>
+      <span class="h-tag">Care Delivery</span>
+      <span class="h-tag">Risk: Low</span>
+      <span class="h-tag" style="border-color:rgba(217,178,106,.7);color:#D9B26A">Illustrative figures</span>
+    </div>
+  </div>
+  <div class="h-right">
+    <div>
+      <div class="h-period">FY Apr'24 – Mar'25</div>
+      <div class="h-status" style="margin-top:5px;justify-content:flex-end"><div class="h-sdot"></div><span>Active · IIAF II</span></div>
+    </div>
+    <svg viewBox="77 95 1095 215" xmlns="http://www.w3.org/2000/svg" style="height:22px;width:auto;margin-top:10px;border:1px solid rgba(255,255,255,.22);border-radius:6px;padding:5px 9px;box-sizing:content-box;display:block;margin-left:auto">
+      <g transform="translate(0,400) scale(1,-1)">
+        <g transform="translate(122.905,279.508)"><path d="M0,0 L-22.905,0 L-22.905,-65.108 C-16.483,-65.194 -8.805,-65.31 0,-65.433 Z" fill="white"/></g>
+        <g transform="translate(100.008,114.191)"><path d="M0,0 L22.905,0 L22.905,68.102 L0,67.894 Z" fill="white"/></g>
+        <g transform="translate(236.949,255.240)"><path d="M0,0 L0.448,0 L8.674,-42.907 C13.921,-42.976 19.269,-43.053 24.702,-43.13 L11.444,24.271 L-20.149,24.271 L-20.149,-42.498 C-13.605,-42.59 -6.898,-42.69 0,-42.783 Z" fill="white"/></g>
+        <g transform="translate(216.797,114.191)"><path d="M0,0 L20.15,0 L20.15,69.075 L0,68.906 Z" fill="white"/></g>
+        <g transform="translate(297.393,279.508)"><path d="M0,0 L-21.531,0 L-21.531,-67.602 C-14.478,-67.694 -7.301,-67.802 0,-67.911 Z" fill="white"/></g>
+        <g transform="translate(275.866,142.133)"><path d="M0,0 L-0.448,0 L-8.596,41.395 L-24.702,41.262 L-11.444,-27.944 L21.531,-27.944 L21.531,41.656 L0,41.472 Z" fill="white"/></g>
+        <g transform="translate(440.743,149.684)"><path d="M0,0 C0,-10.749 -2.979,-19 -15.11,-19 C-24.271,-19 -28.392,-12.139 -28.392,-1.143 L-28.392,12.37 L-51.295,12.37 L-51.295,-7.331 C-51.295,-27.929 -36.864,-36.873 -15.805,-36.873 C11.453,-36.873 21.522,-21.979 21.522,3.896 C21.522,16.961 19.71,24.925 12.163,35.421 L-17.634,35.166 C-0.602,17.486 0,12.463 0,0 Z" fill="white"/></g>
+        <g transform="translate(412.348,244.938)"><path d="M0,0 C0,12.818 4.353,18.089 13.745,18.089 C22.673,18.089 26.561,12.593 26.561,3.203 L26.561,-9.847 L48.085,-9.847 L48.085,5.719 C48.085,17.402 45.33,23.128 41.44,26.792 C35.946,31.825 27.018,35.938 14.647,35.938 C-10.303,35.938 -22.905,24.271 -22.905,-2.747 C-22.905,-15.859 -18.73,-25.836 -12.371,-34.789 C-2.099,-34.935 8.288,-35.089 18.805,-35.237 C1.983,-17.023 0,-10.349 0,0 Z" fill="white"/></g>
+        <g transform="translate(576.534,279.508)"><path d="M0,0 L-22.905,0 L-22.905,-71.537 C-15.28,-71.653 -7.655,-71.76 0,-71.861 Z" fill="white"/></g>
+        <g transform="translate(553.637,114.191)"><path d="M0,0 L22.905,0 L22.905,71.97 L0,71.792 Z" fill="white"/></g>
+        <g transform="translate(713.700,260.279)"><path d="M0,0 L27.473,0 L27.473,19.23 L-50.368,19.23 L-50.368,0 L-22.904,0 L-22.904,-54.267 C-15.256,-54.366 -7.616,-54.481 0,-54.583 Z" fill="white"/></g>
+        <g transform="translate(690.802,114.191)"><path d="M0,0 L22.905,0 L22.905,73.149 L0,72.95 Z" fill="white"/></g>
+        <g transform="translate(903.009,283.106)"><path d="M0,0 C44.959,0 81.431,-36.348 81.647,-81.253 L100.592,-81.523 C99.851,-26.578 55.146,17.749 0.03,17.749 C-54.128,17.749 -98.169,-25.064 -100.391,-78.667 L-81.522,-78.937 C-80.08,-35.121 -44.181,0 0,0 Z" fill="#edad6d"/></g>
+        <g transform="translate(902.957,119.777)"><path d="M0,0 C-40.707,0 -74.346,29.804 -80.558,68.767 L-99.844,68.589 C-93.964,18.606 -51.535,-20.173 0.016,-20.173 C52.213,-20.173 95.12,19.556 100.152,70.434 L80.774,70.257 C75.21,30.567 41.224,0 0,0 Z" fill="white"/></g>
+        <g transform="translate(1069.094,114.191)"><path d="M0,0 L22.888,0 L22.888,71.899 L30.683,71.899 C45.793,71.899 48.54,67.771 48.54,52.213 L48.54,14.894 C48.54,8.249 48.996,4.136 51.28,0 L72.811,0 C71.445,6.868 71.445,15.11 71.445,21.067 L71.445,57.021 C71.445,66.112 69.554,72.563 64.946,76.73 L0,76.184 Z" fill="white"/></g>
+        <g transform="translate(1097.939,205.328)"><path d="M0,0 L-5.95,0 L-5.95,54.953 L5.048,54.953 C19.23,54.953 20.612,52.661 20.612,28.159 C20.612,3.435 18.096,0 0,0 Z M43.509,29.078 C43.509,65.254 40.074,74.183 6.637,74.183 L-28.838,74.183 L-28.838,-4.677 C-7.842,-4.986 11.66,-5.248 29.316,-5.502 C41.34,0.525 43.509,10.294 43.509,29.078 Z" fill="white"/></g>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<!-- ══ STICKY CONTROLS BAR ══ -->
+<div class="ctrl-bar">
+  <!-- Jump links -->
+  <div class="jump-links">
+    <a class="jump-link active" href="#sec-financials" onclick="setActive(this)">Financials</a>
+    <a class="jump-link" href="#sec-kpis" onclick="setActive(this)">KPIs</a>
+    <a class="jump-link" href="#sec-insights" onclick="setActive(this)">Insights &amp; Risks</a>
+  </div>
+
+  <div class="ctrl-divider"></div>
+
+  <!-- Period toggle -->
+  <div class="period-wrap">
+    <span class="period-lbl">View</span>
+    <div class="period-toggle">
+      <button class="p-btn on" id="pMonthly" onclick="setPeriod('monthly',this)">Monthly</button>
+      <button class="p-btn" id="pQuarterly" onclick="setPeriod('quarterly',this)">Quarterly</button>
+      <button class="p-btn" id="pAnnual" onclick="setPeriod('annual',this)">Annual</button>
+    </div>
+  </div>
+
+  <div class="ctrl-divider"></div>
+
+  <!-- Currency toggle -->
+  <div class="fx-wrap">
+    <span class="fx-lbl">Currency</span>
+    <div class="fx-toggle">
+      <button class="fx-btn on" id="btnINR" onclick="setCurrency('INR')">INR</button>
+      <button class="fx-btn" id="btnUSD" onclick="setCurrency('USD')">USD</button>
+    </div>
+    <div class="fx-rate-wrap" id="fxRateWrap">
+      <span class="fx-rate-lbl">1 USD =</span>
+      <input class="fx-rate-input" id="fxRateInput" type="number" value="83.5" min="1" step="0.1" onchange="onRateChange(this.value)">
+      <span class="fx-rate-lbl">INR</span>
+    </div>
+  </div>
+
+  <div class="ctrl-right">
+    <label class="upload-btn">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      Update Data
+      <input type="file" accept=".csv" style="display:none" onchange="loadCSV(event)">
+    </label>
+    <div id="csvStatus"></div>
+  </div>
+</div>
+
+<!-- ══ ONE-PAGE BODY ══ -->
+<div class="page">
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║  SECTION 1 — FINANCIALS      ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+  <div class="page-section" id="sec-financials">
+    <div class="sec-header">
+      <div class="sec-num">1</div>
+      <div class="sec-title">Financial Highlights</div>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="s-sub">Revenue · EBITDA · Cash</div>
+    <div class="ind-charts" id="finCharts"></div>
+
+    <div class="s-sub">Cash &amp; Runway</div>
+    <div class="runway-card">
+      <div class="rw-top">
+        <div class="rw-title">Runway Position — Mar'25</div>
+        <div class="rw-stats">
+          <div><div class="rw-stat-lbl">Current Cash</div><div class="rw-stat-val" id="rwCash" data-inr="61">₹61m</div></div>
+          <div><div class="rw-stat-lbl">Runway</div><div class="rw-stat-val warn">~14 months</div></div>
+          <div><div class="rw-stat-lbl">Monthly Burn</div><div class="rw-stat-val" id="rwBurn" data-inr="4.46">~₹4.46m</div></div>
+        </div>
+      </div>
+      <div class="rw-bar-track"><div class="rw-bar-fill"></div></div>
+      <div class="rw-bar-labels"><span>0 mo</span><span style="color:var(--amber);font-weight:600">▲ Now: ~14 months</span><span>18 mo</span></div>
+      <div class="rw-hist" id="cashHist"></div>
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║  SECTION 2 — KPIs & ESG      ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+  <div class="page-section" id="sec-kpis">
+    <div class="sec-header">
+      <div class="sec-num">2</div>
+      <div class="sec-title">KPIs</div>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="s-sub">Key Performance Indicators</div>
+    <div class="kpi-grid-2x2" id="kpiCards"></div>
+  </div>
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║  SECTION 3 — INSIGHTS        ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+  <div class="page-section" id="sec-insights">
+    <div class="sec-header">
+      <div class="sec-num">3</div>
+      <div class="sec-title">Insights &amp; Risks</div>
+      <div class="sec-line"></div>
+    </div>
+    <div class="s-sub">Performance &amp; Priorities — FY Apr’24–Mar’25</div>
+    <div id="insightsBody"></div>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+// ══════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════
+let USD_MODE = false;
+let EXRATE   = 83.5;
+let PERIOD   = 'monthly'; // 'monthly' | 'quarterly' | 'annual'
+
+// ── Raw monthly data (INR millions for money, raw units for others) ──
+const RAW_M  = ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'];
+
+// Index 0–8 = FY24 (Apr'24–Dec'24), 9–11 = FY25 (Jan'25–Mar'25)
+const RAW = {
+  rev:    [0.56, 0.65, 0.75, 0.85, 0.99, 1.14, 1.3, 1.5, 1.72, 1.98, 2.27, 2.61],
+  ebitda: [-0.76, -0.61, -0.96, -1.04, -1.55, -2.03, -2.1, 2.04, -2.61, -4.31, -4.21, -4.88],
+  cash:   [250, 231, 210, 190, 172, 155, 138, 121, 105, 92, 76, 61],
+  pat:    [1232, 1264, 1288, 1312, 1336, 1352, 1368, 1384, 1400, 1409, 1427, 1410],
+  newp:   [152, 176, 160, 172, 192, 184, 204, 216, 208, 200, 227, 214],
+  arpp:   [15312, 15469, 15625, 15781, 15938, 16094, 16250, 16406, 16719, 16875, 17172, 17652],
+  ltvcac: [2.7,2.9,3.1,3.2,3.4,3.5,3.6,3.8,3.9,4.0,4.6,4.0],
+};
+
+// Quarterly slices [Q1=Apr-Jun, Q2=Jul-Sep, Q3=Oct-Dec, Q4=Jan-Mar]
+const Q_LABELS = ["Q1 FY'25","Q2 FY'25","Q3 FY'25","Q4 FY'25"];
+const Q_SLICES = [[0,1,2],[3,4,5],[6,7,8],[9,10,11]];
+
+// ── Aggregation rules: 'sum' for flows, 'last' for stocks ──
+const AGG = {
+  rev:'sum',ebitda:'sum',cash:'last',
+  pat:'last',newp:'sum',arpp:'last',ltvcac:'last'
+};
+
+function aggregate(key, slices) {
+  return slices.map(idx => {
+    const vals = idx.map(i => RAW[key][i]);
+    return AGG[key] === 'sum' ? vals.reduce((a,b)=>a+b,0) : vals[vals.length-1];
+  });
+}
+
+// ── Build current view data ──
+function viewData() {
+  if (PERIOD === 'monthly') {
+    return { labels: RAW_M, data: RAW };
+  }
+  if (PERIOD === 'quarterly') {
+    const data = {};
+    for (const k of Object.keys(RAW)) data[k] = aggregate(k, Q_SLICES);
+    return { labels: Q_LABELS, data };
+  }
+  // annual
+  const data = {};
+  for (const k of Object.keys(RAW)) data[k] = aggregate(k, [[0,1,2,3,4,5,6,7,8,9,10,11]]);
+  return { labels: ["FY '24–25"], data };
+}
+
+// ══════════════════════════════════════════════
+// FORMATTING
+// ══════════════════════════════════════════════
+function fmtMoney(inrVal, dec=2) {
+  const v = USD_MODE ? inrVal / EXRATE : inrVal;
+  const sym = USD_MODE ? '$' : '₹';
+  return (v < 0 ? '-' + sym : sym) + Math.abs(v).toFixed(dec) + 'm';
+}
+function fmtARPP(v) {
+  if (USD_MODE) return '$' + Math.round(v / EXRATE).toLocaleString();
+  return '₹' + v.toLocaleString();
+}
+function currUnit() { return USD_MODE ? 'Mln USD' : 'Mln INR'; }
+function fmtLabel(i) {
+  // For monthly view, annotate which FY year
+  if (PERIOD !== 'monthly') return RAW_M[i] || '';
+  return RAW_M[i] + (i <= 8 ? "'24" : "'25");
+}
+
+// ══════════════════════════════════════════════
+// CHART ENGINE
+// ══════════════════════════════════════════════
+function spark(container, key, H, labels, vals) {
+  const col = { rev:'#385A49', ebitda:'#a07272', cash:'#6b9080',
+                pat:'#385A49', newp:'#a07272', arpp:'#6b9080', ltvcac:'#7b7a96' }[key];
+  const N = vals.length;
+  const W = 1000, padT = 24, padB = 6;
+  const gap = N > 4 ? 8 : 20;
+  const barW = Math.floor((W - (N-1)*gap) / N);
+  const barX = i => i * (barW + gap);
+
+  const isEbitda = key === 'ebitda';
+  const plotVals = isEbitda ? vals.map(v => Math.abs(v)) : vals;
+  const pMin = Math.min(...plotVals), pMax = Math.max(...plotVals);
+  const spread = pMax - pMin || 1;
+  const floor = Math.max(0, pMin - spread * 0.3);
+  const ceil = pMax + spread * 0.08;
+  const range = ceil - floor || 1;
+  const scaleY = v => padT + ((ceil - v) / range) * (H - padT - padB);
+
+  const nTicks = 3;
+  const tickStep = (ceil - floor) / (nTicks - 1);
+  const ticks = Array.from({length: nTicks}, (_,i) => floor + tickStep * i);
+
+  const bars = plotVals.map((v,i) => {
+    const top = scaleY(v), bot = scaleY(floor);
+    const bh = Math.max(bot - top, 2);
+    return `<g class="bar-g" data-i="${i}">
+      <rect class="bar" x="${barX(i)}" y="${bot}" width="${barW}" height="0" rx="3"
+        fill="${col}" opacity="1" data-top="${top}" data-bot="${bot}" data-bh="${bh}"
+        style="cursor:pointer;transition:opacity .15s"/>
+    </g>`;
+  }).join('');
+
+  const gridLines = ticks.map(t => {
+    const y = scaleY(t);
+    return `<line x1="0" y1="${y}" x2="${W}" y2="${y}" stroke="#E2D9C7" stroke-width="2"/>`;
+  }).join('');
+
+  const el = container.querySelector('.chart-wrap,.kpi-chart-wrap');
+  if (!el) return;
+  el.innerHTML = `<div class="tooltip"></div>
+  <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="width:100%;height:100%;overflow:visible;display:block">
+    ${gridLines}${bars}
+  </svg>`;
+
+  const allGroups = [...el.querySelectorAll('.bar-g')];
+  const allBars   = [...el.querySelectorAll('.bar')];
+  const tt        = el.querySelector('.tooltip');
+  const liveEl    = container.querySelector('.cc-live,.kpi-main');
+  const orig      = liveEl ? liveEl.innerHTML : '';
+
+  // Format value for tooltip
+  const fmtV = v => {
+    if (['rev','ebitda','cash'].includes(key)) return fmtMoney(v, key==='cash'?0:2);
+    if (key === 'arpp') return fmtARPP(v);
+    if (key === 'ltvcac') return v.toFixed(1) + 'x';
+    return v.toLocaleString();
+  };
+
+  allGroups.forEach((g, i) => {
+    g.addEventListener('mouseenter', () => {
+      allBars.forEach((b,j) => b.setAttribute('opacity', j===i?'1':'.3'));
+      const v = vals[i];
+      const prev = i > 0 ? vals[i-1] : null;
+      const mom = prev != null ? ((v - prev) / Math.abs(prev) * 100) : null;
+      const mStr = mom != null ? (mom>=0?'+':'') + mom.toFixed(1) + '%' : '';
+      const mCls = mom==null?'bn':mom>=0?'bg':'br';
+      tt.innerHTML = `<div class="tt-month">${labels[i]}</div>
+        <div class="tt-row"><span class="tt-lbl">${key.toUpperCase()}</span><span class="tt-val">${fmtV(v)}</span></div>
+        ${mStr ? `<div class="tt-delta ${mCls}">${mStr} vs prev</div>` : ''}`;
+      const r2 = el.getBoundingClientRect();
+      const bRect = allBars[i].getBoundingClientRect();
+      let lx = bRect.left - r2.left + barW/2 + 8;
+      if (lx + 160 > r2.width) lx = bRect.left - r2.left - 165;
+      tt.style.left = lx + 'px'; tt.style.top = '0'; tt.style.opacity = '1';
+      if (liveEl) liveEl.innerHTML = fmtV(v).replace('m','') + (currUnit() && ['rev','ebitda','cash'].includes(key) ? `<small> ${currUnit()}</small>` : '');
+    });
+    g.addEventListener('mouseleave', () => {
+      allBars.forEach(b => b.setAttribute('opacity','1'));
+      tt.style.opacity = '0';
+      if (liveEl && orig) liveEl.innerHTML = orig;
+    });
+  });
+}
+
+// ══════════════════════════════════════════════
+// ANIMATE BARS
+// ══════════════════════════════════════════════
+function animateBars(container) {
+  [...container.querySelectorAll('.bar')].forEach((bar, i) => {
+    const top = parseFloat(bar.dataset.top);
+    const bot = parseFloat(bar.dataset.bot);
+    const bh  = parseFloat(bar.dataset.bh);
+    bar.setAttribute('y', bot); bar.setAttribute('height', 0);
+    setTimeout(() => {
+      const start = performance.now(), dur = 400;
+      const step = now => {
+        const t = Math.min((now-start)/dur,1);
+        const e = 1 - Math.pow(1-t,3);
+        bar.setAttribute('y', bot - bh*e);
+        bar.setAttribute('height', bh*e);
+        if (t < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }, i * 30);
+  });
+}
+
+// ══════════════════════════════════════════════
+// CHART CARD BUILDER
+// ══════════════════════════════════════════════
+function makeCC(key, h, labels, vals) {
+  const last = vals[vals.length-1], prev = vals[vals.length-2];
+  const mom = prev != null ? ((last-prev)/Math.abs(prev)*100).toFixed(1) : null;
+  const pos = mom != null && parseFloat(mom) >= 0;
+  const tColor = key==='ebitda' ? 'var(--red)' : 'var(--text)';
+  const topColor = key==='rev'?'var(--navy)':key==='ebitda'?'var(--red)':'var(--green)';
+  const lbl = {rev:'Revenue',ebitda:'EBITDA',cash:'Cash'}[key];
+
+  const fmtV = v => key==='cash' ? fmtMoney(v,0) : fmtMoney(v);
+  const periodLabel = PERIOD==='monthly'?'MoM':PERIOD==='quarterly'?'QoQ':'YoY';
+  const startLbl = labels[0], endLbl = labels[labels.length-1];
+
+  const div = document.createElement('div');
+  div.className = 'chart-card';
+  div.style.borderTopColor = topColor;
+  div.innerHTML = `
+    <div class="cc-head" style="margin-bottom:2px">
+      <span class="cc-title">${lbl}</span>
+      ${mom!=null?`<span class="bdg ${pos?'bg':'br'}" style="font-size:8px">${pos?'+':''}${mom}% ${periodLabel}</span>`:''}
+    </div>
+    <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:8px">
+      <span class="cc-live" style="font-family:var(--serif);font-size:24px;color:${tColor}">${fmtV(last).replace('m','')}</span>
+      <span style="font-size:10px;color:var(--text3)">${currUnit()}</span>
+    </div>
+    <div class="cc-hint">hover bars to explore</div>
+    <div class="chart-wrap" style="height:${h}px"></div>
+    <div class="cc-footer">
+      <div><div class="cc-foot-lbl">${startLbl}</div><div class="cc-foot-val">${fmtV(vals[0])}</div></div>
+      <div><div class="cc-foot-lbl">Change</div><div class="cc-foot-val">${mom!=null?`<span class="bdg ${pos?'bg':'br'}">${pos?'+':''}${mom}%</span>`:'-'}</div></div>
+      <div><div class="cc-foot-lbl">${endLbl}</div><div class="cc-foot-val">${fmtV(last)}</div></div>
+    </div>`;
+  return div;
+}
+
+// ══════════════════════════════════════════════
+// KPI CARD BUILDER
+// ══════════════════════════════════════════════
+const KM = {
+  pat:   {prev:'1,427',pd:'-1%',pp:false,start:'1,232',sd:'+14%',sp:true,
+          desc:"Total patients grew from 1,232 in Apr'24 to 1,410 in Mar'25 (+14%), reflecting consistent network expansion and retention across the FY."},
+  newp:  {prev:'227',pd:'-6%',pp:false,start:'152',sd:'+41%',sp:true,
+          desc:"New patient acquisition grew 41% from Apr'24 to Mar'25. Growth is campaign-driven — peaks in Aug and Nov reflect deliberate onboarding pushes as new centres came online."},
+  arpp:  {prev:()=>fmtARPP(17172),pd:'+3%',pp:true,start:()=>fmtARPP(15312),sd:'+15%',sp:true,
+          desc:"ARPP grew consistently from ₹15,312 in Apr'24 to ₹17,652 in Mar'25 (+15%), driven by improved service mix and cross-selling across therapy types."},
+  ltvcac:{prev:'4.6x',pd:'-13%',pp:false,start:'2.7x',sd:'+48%',sp:true,
+          desc:"LTV/CAC improved from 2.7x in Apr'24 to 4.0x in Mar'25, well above the 3.0x healthy threshold."},
+};
+
+function makeKPI(key, h, labels, vals) {
+  const d  = {pat:'Patients',newp:'New Patients',arpp:'Avg Rev/Patient',ltvcac:'LTV/CAC'}[key];
+  const m  = KM[key];
+  const last = vals[vals.length-1];
+  const col  = {pat:'#385A49',newp:'#a07272',arpp:'#6b9080',ltvcac:'#7b7a96'}[key];
+  const fmtV = v => {
+    if (key==='arpp') return fmtARPP(v);
+    if (key==='ltvcac') return v.toFixed(1)+'x';
+    return v.toLocaleString();
+  };
+  const prev = vals[vals.length-2];
+  const mom  = prev!=null ? ((last-prev)/Math.abs(prev)*100).toFixed(1) : null;
+  const pos  = mom!=null && parseFloat(mom)>=0;
+  const periodLabel = PERIOD==='monthly'?'MoM':PERIOD==='quarterly'?'QoQ':'YoY';
+
+  const div = document.createElement('div');
+  div.className = 'kpi-card';
+  div.style.borderTopColor = col;
+  div.innerHTML = `
+    <div class="kpi-lbl">${d}</div>
+    <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:8px">
+      <div class="kpi-main">${fmtV(last)}</div>
+      ${mom!=null?`<span class="bdg ${pos?'bg':'br'}" style="font-size:8px">${pos?'+':''}${mom}% ${periodLabel}</span>`:''}
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:6px">
+      <div style="flex:1;background:var(--off);border-radius:7px;padding:5px 8px;border:1px solid var(--border)">
+        <div style="font-size:7px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text3);margin-bottom:2px">Feb'25 (prev)</div>
+        <div style="font-size:11px;color:var(--text2);font-weight:500">${typeof m.prev==='function'?m.prev():m.prev}</div>
+      </div>
+      <div style="flex:1;background:var(--off);border-radius:7px;padding:5px 8px;border:1px solid var(--border)">
+        <div style="font-size:7px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text3);margin-bottom:2px">Apr'24 (start)</div>
+        <div style="font-size:11px;color:var(--text2);font-weight:500">${typeof m.start==='function'?m.start():m.start} <span class="bdg ${m.sp?'bg':'br'}" style="font-size:7px">${m.sd}</span></div>
+      </div>
+    </div>
+    <div class="kpi-chart-wrap" style="height:${h}px"></div>
+    <div class="kpi-desc">${m.desc}</div>`;
+  return div;
+}
+
+// ══════════════════════════════════════════════
+// CASH HISTORY
+// ══════════════════════════════════════════════
+function buildCashHist() {
+  const el = document.getElementById('cashHist');
+  const pts = [
+    {mo:"Apr'24",v:250},{mo:"Jun'24",v:210},{mo:"Sep'24",v:155},
+    {mo:"Dec'24",v:105},{mo:"Feb'25",v:76}, {mo:"Mar'25",v:61}
+  ];
+  const maxV = 250;
+  el.innerHTML = pts.map(p => {
+    const pct = p.v / maxV * 100;
+    const col = p.v>125?'#385A49':p.v>75?'#9a8560':'#a07272';
+    const lbl = USD_MODE ? '$'+(p.v/EXRATE).toFixed(1)+'m' : '₹'+p.v+'m';
+    return `<div class="rw-hist-item">
+      <div class="rw-hist-bar-wrap"><div class="rw-hist-bar-fill" style="height:${pct}%;background:${col}"></div></div>
+      <div class="rw-hist-lbl">${p.mo}</div>
+      <div class="rw-hist-val">${lbl}</div>
+    </div>`;
+  }).join('');
+}
+
+// ══════════════════════════════════════════════
+// INSIGHTS BUILDER — fully reactive to currency
+// ══════════════════════════════════════════════
+function buildInsights() {
+  const c = USD_MODE ? 'USD' : 'INR';
+  const sym = USD_MODE ? '$' : '₹';
+  const r = (inr, dec=2) => sym + Math.abs(USD_MODE ? inr/EXRATE : inr).toFixed(dec) + 'm';
+  const arppFmt = v => USD_MODE ? '$'+Math.round(v/EXRATE).toLocaleString() : '₹'+v.toLocaleString();
+
+  // Key figures
+  const rev_start = r(0.45), rev_end = r(2.09);
+  const arpp_start = arppFmt(9800), arpp_end = arppFmt(11297);
+  const gp_nov = r(4.18), grant = r(4,0), gp_nov_ex = r(0.59), ebitda_nov = r(1.63);
+  const exp_start = r(0.48), exp_end = r(2.22);
+  const sal_fy = r(7.87), mgmt_fy = r(8.26);
+  const ebitda_fy = r(20.05), rev_fy = r(13.05);
+  const burn_h2 = r(3.57), burn_h1 = r(0.62);
+  const adv_fy = r(2.31), oneoff_fy = r(1.96);
+  const rent_fy = r(5.95);
+  const cash_end = r(49,0), runway_mo = r(3.57);
+
+  const html = `
+  <div class="perf-grid">
+
+    <div class="perf-card">
+      <div class="perf-card-header">
+        <div class="pch-dot" style="background:var(--green)"></div>
+        <div class="pch-label" style="color:var(--green)">Performance Highlights</div>
+      </div>
+      <ul class="perf-ul">
+        <li><div class="li-dot" style="background:var(--green)"></div><div>
+          Revenue from operations grew <b>every single month</b> this FY — from <b>${rev_start}</b> in Apr'24 to <b>${rev_end}</b> in Mar'25,
+          a <b>364% increase</b> in 12 months. Mar'25 recorded the largest MoM jump (+${r(0.27)}),
+          signalling that centre utilisation is accelerating as the hub-and-spoke network matures.
+        </div></li>
+        <li><div class="li-dot" style="background:var(--green)"></div><div>
+          ARPP improved consistently from <b>${arpp_start}</b> in Apr'24 to <b>${arpp_end}</b> in Mar'25 (+15%).
+          Combined with a growing patient base (1,232 → 1,410), this double flywheel —
+          more patients, each paying more — is the strongest unit-economics signal in the dataset.
+        </div></li>
+      </ul>
+    </div>
+
+    <div class="perf-card">
+      <div class="perf-card-header">
+        <div class="pch-dot" style="background:var(--navy)"></div>
+        <div class="pch-label" style="color:var(--navy)">What the Data Is Telling Us</div>
+      </div>
+      <ul class="perf-ul">
+        <li><div class="li-dot" style="background:var(--navy)"></div><div>
+          The Nov'24 gross profit surge to <b>${gp_nov}</b> was driven entirely by a <b>${grant} one-time grant</b> —
+          not organic revenue. Stripping this out, underlying gross profit in Nov was ${gp_nov_ex},
+          consistent with the operational trend. Nov'24 EBITDA of +${ebitda_nov} should be read as a non-recurring item.
+        </div></li>
+        <li><div class="li-dot" style="background:var(--navy)"></div><div>
+          The total expense base scaled from <b>${exp_start}/month</b> in Apr'24 to <b>${exp_end}/month</b> in Mar'25 — a
+          <b>367% rise</b>, closely matching revenue growth. The two largest buckets —
+          therapist salaries (<b>${sal_fy} FY</b>, 30% of opex) and management/operations (<b>${mgmt_fy}</b>, 32%) —
+          are semi-variable and will grow with each new centre added.
+        </div></li>
+      </ul>
+    </div>
+
+    <div class="perf-card">
+      <div class="perf-card-header">
+        <div class="pch-dot" style="background:var(--amber)"></div>
+        <div class="pch-label" style="color:var(--amber)">Key Risks</div>
+      </div>
+      <ul class="perf-ul">
+        <li><div class="li-dot" style="background:var(--red)"></div><div>
+          FY EBITDA (excl. the ${grant} Nov grant) totals <b>−${ebitda_fy}</b> against operational revenue of
+          <b>${rev_fy}</b> — the company spent ${sym}1.54 for every ${sym}1 earned. Monthly EBITDA losses
+          accelerated sharply in H2: <b>Jan–Mar averaged −${burn_h2}/month</b> vs Apr–Jun's −${burn_h1}/month.
+        </div></li>
+        <li><div class="li-dot" style="background:var(--amber)"></div><div>
+          Advertising/SEO (<b>${adv_fy}</b>) and extraordinary one-time items (<b>${oneoff_fy}</b>) account for
+          <b>33% of non-payroll FY opex</b>. These costs are unpredictable — if they do not translate
+          to sustained patient acquisition, unit economics deteriorate faster than the revenue line suggests.
+        </div></li>
+      </ul>
+    </div>
+
+    <div class="perf-card">
+      <div class="perf-card-header">
+        <div class="pch-dot" style="background:var(--green)"></div>
+        <div class="pch-label" style="color:var(--green)">Outlook</div>
+      </div>
+      <ul class="perf-ul">
+        <li><div class="li-dot" style="background:var(--green)"></div><div>
+          Revenue has compounded at ~15% MoM through FY24-25. If growth continues at even half that pace,
+          the largely fixed cost base — primarily rent (<b>${rent_fy} FY</b>) and management salaries —
+          will be absorbed within <b>2–3 quarters</b>. Breakeven is structurally reachable.
+        </div></li>
+        <li><div class="li-dot" style="background:var(--navy)"></div><div>
+          LTV/CAC improved from 2.7x to 4.0x across the FY — well above the 3x healthy threshold.
+          With a monthly EBITDA run-rate of −${runway_mo} as of Mar'25 and cash at <b>${cash_end}</b>,
+          the company has roughly <b>13–14 months of operational runway</b> — adequate if revenue
+          momentum is sustained and no significant capex surprises materialise.
+        </div></li>
+      </ul>
+    </div>
+
+  </div>`;
+
+  document.getElementById('insightsBody').innerHTML = html;
+}
+
+// ══════════════════════════════════════════════
+// REBUILD ALL CHARTS
+// ══════════════════════════════════════════════
+function rebuildAll() {
+  const { labels, data } = viewData();
+
+  // Financial charts
+  const fc = document.getElementById('finCharts');
+  fc.innerHTML = '';
+  ['rev','ebitda','cash'].forEach(k => {
+    const c = makeCC(k, 120, labels, data[k]);
+    fc.appendChild(c);
+    spark(c, k, 120, labels, data[k]);
+  });
+
+  // KPI cards
+  const kg = document.getElementById('kpiCards');
+  kg.innerHTML = '';
+  ['pat','newp','arpp','ltvcac'].forEach(k => {
+    const c = makeKPI(k, 100, labels, data[k]);
+    kg.appendChild(c);
+    spark(c, k, 100, labels, data[k]);
+  });
+
+  // Cash history
+  buildCashHist();
+
+  // Insights (always monthly data for narrative)
+  buildInsights();
+
+  // Animate bars in both containers
+  animateBars(document.getElementById('sec-financials'));
+  animateBars(document.getElementById('sec-kpis'));
+
+  // Update runway stat labels
+  const ce = document.getElementById('rwCash');
+  const be = document.getElementById('rwBurn');
+  if (ce) { const v = +ce.dataset.inr; ce.textContent = USD_MODE ? '$'+(v/EXRATE).toFixed(1)+'m' : '₹'+v+'m'; }
+  if (be) { const v = +be.dataset.inr; be.textContent = '~'+(USD_MODE ? '$'+(v/EXRATE).toFixed(2)+'m' : '₹'+v+'m'); }
+}
+
+// ══════════════════════════════════════════════
+// CONTROLS
+// ══════════════════════════════════════════════
+function setCurrency(mode) {
+  USD_MODE = (mode === 'USD');
+  document.getElementById('btnINR').classList.toggle('on', !USD_MODE);
+  document.getElementById('btnUSD').classList.toggle('on',  USD_MODE);
+  document.getElementById('fxRateWrap').style.display = USD_MODE ? 'flex' : 'none';
+  rebuildAll();
+}
+
+function onRateChange(v) {
+  EXRATE = parseFloat(v) || 83.5;
+  if (USD_MODE) rebuildAll();
+}
+
+function setPeriod(p, btn) {
+  PERIOD = p;
+  document.querySelectorAll('.p-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  rebuildAll();
+}
+
+function setActive(el) {
+  document.querySelectorAll('.jump-link').forEach(l => l.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// Highlight jump link on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      const map = {'sec-financials':'#sec-financials','sec-kpis':'#sec-kpis','sec-insights':'#sec-insights'};
+      document.querySelectorAll('.jump-link').forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === map[id]);
+      });
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+
+// ══════════════════════════════════════════════
+// CSV LOADER (unchanged)
+// ══════════════════════════════════════════════
+function loadCSV(evt) {
+  const file = evt.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      let raw = e.target.result.replace(/^\uFEFF/,'').replace(/\r\n/g,'\n').replace(/\r/g,'\n');
+      function parseCSV(text){
+        const rows=[];let row=[];let field='';let inQ=false;
+        for(let i=0;i<text.length;i++){
+          const c=text[i];
+          if(inQ){if(c==='"'&&text[i+1]==='"'){field+='"';i++;}else if(c==='"'){inQ=false;}else{field+=c;}}
+          else{if(c==='"'){inQ=true;}else if(c===','){row.push(field.trim());field='';}
+            else if(c==='\n'){row.push(field.trim());field='';if(row.some(f=>f))rows.push(row);row=[];}
+            else{field+=c;}}
+        }
+        if(field||row.length)row.push(field.trim());
+        if(row.some(f=>f))rows.push(row);
+        return rows;
+      }
+      const allRows = parseCSV(raw);
+      let hIdx = allRows.findIndex(r=>r[0]&&r[0].toLowerCase().includes('month'));
+      if (hIdx < 0) hIdx = 0;
+      const headers = allRows[hIdx].map(h=>h.toLowerCase().replace(/[\s\n\r()\-\/]/g,''));
+      function findCol(names){for(const n of names){const i=headers.findIndex(h=>h.includes(n));if(i>=0)return i;}return -1;}
+      const cm={month:findCol(['month'])||0,rev:findCol(['revenue','rev'])||1,ebitda:findCol(['ebitda'])||2,
+                cash:findCol(['cash'])||3,pat:findCol(['patients','totalpat'])||4,
+                newp:findCol(['newpatient','newp'])||5,arpp:findCol(['arpp','avgrev'])||6,ltvcac:findCol(['ltvcac','ltv'])||7};
+      const rows=allRows.slice(hIdx+1).filter(r=>{const f=(r[0]||'').trim();return f&&!f.toLowerCase().includes('month');});
+      if(!rows.length){alert('No data rows found.');return;}
+      function col(k){return rows.map(r=>{const v=parseFloat((r[cm[k]]||'').replace(/[^0-9.\-]/g,''));return isNaN(v)?0:v;});}
+      RAW_M.length=0;rows.forEach(r=>RAW_M.push((r[cm.month]||'').trim()));
+      RAW.rev=col('rev');RAW.ebitda=col('ebitda');RAW.cash=col('cash');
+      RAW.pat=col('pat');RAW.newp=col('newp');RAW.arpp=col('arpp');RAW.ltvcac=col('ltvcac');
+      rebuildAll();
+      const st=document.getElementById('csvStatus');
+      st.textContent='✓ '+rows.length+' months loaded';st.style.opacity='1';
+      setTimeout(()=>st.style.opacity='0',4000);
+      evt.target.value='';
+    } catch(err){alert('Error reading CSV:\n'+err.message);}
+  };
+  reader.readAsText(file);
+}
+
+// ══════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════
+(function(){
+  rebuildAll();
+  ['sec-financials','sec-kpis','sec-insights'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) observer.observe(el);
+  });
+})();
+</script>
+</body>
+</html>

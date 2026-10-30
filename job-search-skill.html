@@ -1,0 +1,766 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sourcing sweep — sample output</title>
+<meta name="description" content="A repeatable sourcing sweep run as an AI skill. Sample output: 53 roles, screened and scored.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{color-scheme:light;--void:#F1EBDF;--void-2:#E9E2D3;--void-3:#E2D9C7;--accent:#385A49;--gold:#D9B26A;--ink:#111110;--cream:#F1EBDF;
+ --text:#111110;--text-soft:#5E5A50;--line:#D3C9B5;
+ --font-display:"Archivo Black","Arial Black",sans-serif;--font-serif:"Instrument Serif",Georgia,serif;--font-body:"Inter",system-ui,sans-serif;
+ --font-data:"JetBrains Mono",ui-monospace,monospace;
+ --ease:cubic-bezier(.22,.7,.26,1);
+ --dots:radial-gradient(circle at 1px 1px,rgba(17,17,16,.09) 1px,transparent 0)}
+body{background:var(--void);color:var(--text);font-family:var(--font-body);line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:84rem;margin:0 auto;padding-inline:max(1.25rem,env(safe-area-inset-left,0px))}
+.band{padding-block:clamp(2.4rem,6vw,4rem);border-bottom:1px solid var(--line)}
+.band--dots{background-image:var(--dots);background-size:22px 22px}
+h1{font-family:var(--font-display);font-variation-settings:"wdth" 118,"wght" 800;letter-spacing:-0.03em;line-height:1.02;font-size:clamp(2.2rem,5.6vw,3.8rem)}
+.eyebrow{font-family:var(--font-data);font-weight:500;font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-soft)}
+.lede{color:var(--text-soft);font-size:clamp(1rem,2vw,1.1rem);max-width:66ch}
+a{color:var(--accent)}
+.back{display:inline-flex;gap:0.5rem;font-family:var(--font-data);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;color:var(--text-soft)}
+.back:hover{color:var(--accent)}
+.pill{display:inline-block;font-family:var(--font-data);font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.34rem 0.7rem;border:1px solid var(--line);border-radius:999px;color:var(--text-soft)}
+.pill--on{border-color:var(--accent);color:var(--accent)}
+.tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1.5rem}
+.tabs{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.tab{font-family:var(--font-data);font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.45rem 0.85rem;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--text-soft);cursor:pointer;transition:all 180ms var(--ease)}
+.tab[aria-pressed="true"]{background:var(--accent);color:var(--cream);border-color:var(--accent)}
+.sheet{border:1px solid var(--line);border-radius:12px;background:var(--void-2);overflow:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:0.9rem;min-width:66rem;table-layout:fixed}
+col.c1{width:13%}col.c2{width:19%}col.c3{width:8%}col.c4{width:4%}col.c5{width:7%}col.c6{width:7%}col.c7{width:10%}col.c8{width:8%}col.c9{width:4%}col.c10{width:20%}
+thead th{position:sticky;top:0;background:var(--void-3);text-align:left;font-family:var(--font-data);font-weight:500;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-soft);padding:0.85rem 0.9rem;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:0.8rem 0.9rem;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:rgba(17,17,16,.04)}
+td.f{font-weight:600;overflow-wrap:anywhere}
+td{overflow-wrap:anywhere}
+td.m{font-family:var(--font-data);font-size:0.76rem;color:var(--text-soft)}
+td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
+.v{display:inline-block;font-family:var(--font-data);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.22rem 0.5rem;border-radius:999px;border:1px solid;white-space:nowrap}
+.v--yes{color:var(--accent);border-color:var(--accent)}
+.v--no{color:#7A7466;border-color:var(--line)}
+.why{color:var(--text-soft);font-size:0.85rem;display:inline}
+.note{font-family:var(--font-data);font-size:0.68rem;color:#7A7466;margin-top:1.2rem;line-height:1.6}
+footer{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;padding-block:2rem;font-family:var(--font-data);font-size:0.68rem;color:var(--text-soft)}
+
+/* ===== Editorial restyle — matches the intro video ===== */
+h1,h2,h3{font-family:var(--font-display);font-variation-settings:normal;font-weight:400;text-transform:uppercase;letter-spacing:-0.02em;line-height:0.98}
+h1 span,h2 span,h3 span{font-family:var(--font-serif);font-style:italic;text-transform:none;letter-spacing:0;color:var(--accent)}
+.lede{font-family:var(--font-serif);font-size:clamp(1.3rem,2.2vw,1.6rem);line-height:1.28;color:var(--text)}
+.pill,.tab,.reset{border-radius:6px}
+.tab[aria-pressed="true"]{color:var(--cream)}
+.back:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<div class="band band--dots">
+  <div class="wrap">
+    <a class="back" href="index.html">&larr; Back to the work</a>
+    <p class="eyebrow" style="margin-top:1.6rem">AI workflow &middot; Sourcing</p>
+    <h1 style="margin-top:0.7rem;max-width:16ch">A sourcing sweep, run as a skill</h1>
+    <p class="lede" style="margin-top:1.4rem">
+      It crawls fund career pages and startup boards on a schedule, then scores every opening against five stated filters.<br>
+      Anything that fails is screened out in a single line, with the reason recorded, before any time goes into tailoring.<br>
+      The output is the sheet below &mdash; one row per role, each carrying its own verdict.
+    </p>
+    <div class="tags">
+      <span class="pill pill--on">53 roles</span>
+      <span class="pill">8 sweeps</span>
+      <span class="pill">Output as at 22 Oct 2026</span>
+    </div>
+  </div>
+</div>
+
+<div class="band">
+  <div class="wrap">
+    <div class="tabs">
+      <button class="tab" type="button" data-s="funds" aria-pressed="true">Funds hiring &middot; 26</button>
+      <button class="tab" type="button" data-s="startups" aria-pressed="false">Founder&rsquo;s office &middot; 27</button>
+    </div>
+
+    <div class="sheet" id="s-funds">
+      <table>
+        <colgroup><col class="c1"><col class="c2"><col class="c3"><col class="c4"><col class="c5"><col class="c6"><col class="c7"><col class="c8"><col class="c9"><col class="c10"></colgroup>
+        <thead><tr><th>Firm</th><th>Role</th><th>City</th><th>Exp</th><th>Pay</th><th>Work rights</th><th>Source</th><th>Posted</th><th>Age</th><th>Verdict</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="f">Artha Group</td>
+          <td>Compliance Associate</td>
+          <td class="m">Mumbai</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Venture Capital Careers</td>
+          <td class="m n">2026-09-23</td>
+          <td class="m n">29d</td>
+          <td><span class="v v--no">No-go</span> <span class="why">Back-office.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Artha Group</td>
+          <td>Associate – Venture Capital</td>
+          <td class="m">Mumbai</td>
+          <td class="m n">—</td>
+          <td class="m n">₹20 L</td>
+          <td class="m">India</td>
+          <td class="m">Venture Capital Careers</td>
+          <td class="m n">2026-09-23</td>
+          <td class="m n">29d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">Early-stage fund, active hirer.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Campus Fund</td>
+          <td>Analyst / Investment role (application process)</td>
+          <td class="m">India</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Direct application</td>
+          <td class="m n">2026-09-22</td>
+          <td class="m n">30d</td>
+          <td><span class="v v--yes">Screened in</span></td>
+        </tr>
+        <tr>
+          <td class="f">ElevenX Capital</td>
+          <td>Associate Chief of Staff</td>
+          <td class="m">Gurugram</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Venture Capital Careers</td>
+          <td class="m n">2026-10-01</td>
+          <td class="m n">21d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">On-site Gurugram.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Duende Capital</td>
+          <td>Venture Partner</td>
+          <td class="m">Remote (worldwide)</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">Verify</td>
+          <td class="m">Venture Capital Careers</td>
+          <td class="m n">2026-10-03</td>
+          <td class="m n">19d</td>
+          <td><span class="v v--no">No-go</span> <span class="why">Venture Partner is a carry-only / non-salaried structure in most cases.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Activate</td>
+          <td>Fund Operations Manager</td>
+          <td class="m">Mumbai</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Venture Capital Careers</td>
+          <td class="m n">2026-10-01</td>
+          <td class="m n">21d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">Fund ops rather than investing.</span></td>
+        </tr>
+        <tr>
+          <td class="f">GHARAGE Ventures</td>
+          <td>Senior Vice President</td>
+          <td class="m">Remote (worldwide)</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">Verify</td>
+          <td class="m">Venture Capital Careers</td>
+          <td class="m n">2026-10-01</td>
+          <td class="m n">21d</td>
+          <td><span class="v v--no">No-go</span> <span class="why">SVP is well above the target band.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Titan Capital</td>
+          <td>Full-Stack AI Engineer</td>
+          <td class="m">Gurugram</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Venture Capital Careers</td>
+          <td class="m n">2026-10-01</td>
+          <td class="m n">21d</td>
+          <td><span class="v v--no">No-go</span> <span class="why">Engineering seat — not a fit.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Artha Group</td>
+          <td>Compliance Officer – Gift City</td>
+          <td class="m">Gandhinagar</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Venture Capital Careers</td>
+          <td class="m n">2026-09-30</td>
+          <td class="m n">22d</td>
+          <td><span class="v v--no">No-go</span> <span class="why">Back-office compliance.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Transition VC</td>
+          <td>Fund Operations Analyst</td>
+          <td class="m">Bengaluru</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Venture Capital Careers</td>
+          <td class="m n">2026-09-29</td>
+          <td class="m n">23d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">Fund ops, analyst level.</span></td>
+        </tr>
+        <tr>
+          <td class="f">lvlUp Ventures</td>
+          <td>Principal, Head of CPG (Consumer Goods)</td>
+          <td class="m">Remote (worldwide)</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">Verify</td>
+          <td class="m">Venture Capital Careers</td>
+          <td class="m n">2026-09-28</td>
+          <td class="m n">24d</td>
+          <td><span class="v v--no">No-go</span> <span class="why">Principal is above the target band — listed for visibility, not as a fit.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Kalaari Capital</td>
+          <td>Kalaari Fellowship</td>
+          <td class="m">India</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Direct application</td>
+          <td class="m n">2026-09-27</td>
+          <td class="m n">25d</td>
+          <td><span class="v v--yes">Screened in</span></td>
+        </tr>
+        <tr>
+          <td class="f">LVX</td>
+          <td>Investment Associate – Deal Sourcing</td>
+          <td class="m">India</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">LinkedIn</td>
+          <td class="m n">2026-09-26</td>
+          <td class="m n">26d</td>
+          <td><span class="v v--yes">Screened in</span></td>
+        </tr>
+        <tr>
+          <td class="f">Titan Capital</td>
+          <td>Investment Analyst / Associate – Investments</td>
+          <td class="m">Gurugram</td>
+          <td class="m n">2</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Venture Capital Careers</td>
+          <td class="m n">2026-09-17</td>
+          <td class="m n">35d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">Kunal Bahl / Rohit Bansal seed fund, INR 200 Cr Winners Fund.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Artha Group</td>
+          <td>Principal – Venture Capital</td>
+          <td class="m">Gandhinagar</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Venture Capital Careers</td>
+          <td class="m n">2026-09-17</td>
+          <td class="m n">35d</td>
+          <td><span class="v v--no">No-go</span></td>
+        </tr>
+        <tr>
+          <td class="f">Mavin Ventures</td>
+          <td>Senior Associate</td>
+          <td class="m">Delhi</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Venture Capital Careers</td>
+          <td class="m n">2026-09-15</td>
+          <td class="m n">37d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">Verify seniority band.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Neo (neo.work)</td>
+          <td>Analyst – Investments and Corporate Development</td>
+          <td class="m">Mumbai</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Crustdata / LinkedIn</td>
+          <td class="m n">2026-09-09</td>
+          <td class="m n">43d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">43 headcount; front-office investments + corp dev.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Fundalogical Ventures</td>
+          <td>Investment Associate</td>
+          <td class="m">Mumbai</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Venture Capital Careers</td>
+          <td class="m n">2026-09-06</td>
+          <td class="m n">46d</td>
+          <td><span class="v v--no">No-go</span></td>
+        </tr>
+        <tr>
+          <td class="f">Tomorrow Capital</td>
+          <td>Associate Vice President</td>
+          <td class="m">Mumbai</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Venture Capital Careers</td>
+          <td class="m n">2026-08-30</td>
+          <td class="m n">53d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">Consumer/healthcare/edtech, USD 100 Mn.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Antler</td>
+          <td>Capital Partner / Global Capital Partner (India)</td>
+          <td class="m">Mumbai</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Crustdata / LinkedIn</td>
+          <td class="m n">2026-08-25</td>
+          <td class="m n">58d</td>
+          <td><span class="v v--no">No-go</span> <span class="why">LP / fundraising mandate, not an investing seat.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Green Marble</td>
+          <td>Investment Analyst</td>
+          <td class="m">New Delhi</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Venture Capital Careers</td>
+          <td class="m n">2026-08-23</td>
+          <td class="m n">60d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">NCR-based, on-site.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Z47 (ex-Matrix)</td>
+          <td>Analyst – Corporate Development</td>
+          <td class="m">Bengaluru</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Crustdata / LinkedIn</td>
+          <td class="m n">2026-08-20</td>
+          <td class="m n">63d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">Fund-side corp dev analyst; closest title match on the watchlist.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Undisclosed VC fund (via Smart HR Consultants)</td>
+          <td>Analyst – Venture Capital Fund</td>
+          <td class="m">Gurugram</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Crustdata / LinkedIn</td>
+          <td class="m n">2026-08-19</td>
+          <td class="m n">64d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">Fund name not disclosed in listing.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Mela Ventures</td>
+          <td>Investment Analyst</td>
+          <td class="m">Bengaluru</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Venture Capital Careers</td>
+          <td class="m n">2026-08-16</td>
+          <td class="m n">67d</td>
+          <td><span class="v v--no">No-go</span> <span class="why">Requires an engineering degree — the case that prompted the tech filter.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Peak XV Partners</td>
+          <td>Investment Analyst – Surge</td>
+          <td class="m">Bengaluru</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Crustdata / LinkedIn</td>
+          <td class="m n">2026-08-05</td>
+          <td class="m n">78d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">Not refreshed since 16 Aug.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Undisclosed VC fund (via Intellectual Capital HR)</td>
+          <td>Associate / Senior Associate – VC Fund</td>
+          <td class="m">Mumbai</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Crustdata / LinkedIn</td>
+          <td class="m n">2026-06-16</td>
+          <td class="m n">128d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">Retained search; fund name not disclosed.</span></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sheet" id="s-startups" hidden>
+      <table>
+        <colgroup><col class="c1"><col class="c2"><col class="c3"><col class="c4"><col class="c5"><col class="c6"><col class="c7"><col class="c8"><col class="c9"><col class="c10"></colgroup>
+        <thead><tr><th>Firm</th><th>Role</th><th>City</th><th>Exp</th><th>Pay</th><th>Work rights</th><th>Source</th><th>Posted</th><th>Age</th><th>Verdict</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="f">OpenVector</td>
+          <td>Chief of Staff</td>
+          <td class="m">Gurgaon</td>
+          <td class="m n">2</td>
+          <td class="m n">₹16–22 L</td>
+          <td class="m">India</td>
+          <td class="m">Wellfound</td>
+          <td class="m n">2026-09-10</td>
+          <td class="m n">42d</td>
+          <td><span class="v v--yes">Screened in</span></td>
+        </tr>
+        <tr>
+          <td class="f">ZenTrades</td>
+          <td>Chief of Staff</td>
+          <td class="m">Bengaluru</td>
+          <td class="m n">3</td>
+          <td class="m n">₹15–30 L</td>
+          <td class="m">India</td>
+          <td class="m">Wellfound</td>
+          <td class="m n">2026-10-06</td>
+          <td class="m n">16d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">INR 15–30L on a 3-year requirement is the best pay-to-experience ratio on either sheet.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Antino Labs</td>
+          <td>Senior Associate – Founder&#x27;s Office</td>
+          <td class="m">Gurgaon</td>
+          <td class="m n">2</td>
+          <td class="m n">₹12–15 L</td>
+          <td class="m">India</td>
+          <td class="m">Wellfound</td>
+          <td class="m n">2026-10-06</td>
+          <td class="m n">16d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">Gurgaon, founder&#x27;s office, 2-year requirement.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Gilgamesh</td>
+          <td>Founder&#x27;s Office – Partnerships &amp; Ecosystem Lead</td>
+          <td class="m">Remote (worldwide)</td>
+          <td class="m n">5</td>
+          <td class="m n">—</td>
+          <td class="m">Verify</td>
+          <td class="m">Wellfound</td>
+          <td class="m n">2026-10-06</td>
+          <td class="m n">16d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">Equity only — 1.0–3.0%, no cash band published.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Unetra</td>
+          <td>Chief of Staff — Office of the Founder</td>
+          <td class="m">Mumbai</td>
+          <td class="m n">3</td>
+          <td class="m n">₹16–22 L</td>
+          <td class="m">India</td>
+          <td class="m">Wellfound</td>
+          <td class="m n">2026-09-21</td>
+          <td class="m n">31d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">Same band as OpenVector, office-of-the-founder scope rather than ops-weighted.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Docket AI</td>
+          <td>Founder&#x27;s Office (Business Operations)</td>
+          <td class="m">Bengaluru</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Wellfound</td>
+          <td class="m n">2026-09-18</td>
+          <td class="m n">34d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">BizOps-weighted founder&#x27;s office.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Frequency.cx</td>
+          <td>Founder&#x27;s Office Executive Assistant</td>
+          <td class="m">Bengaluru</td>
+          <td class="m n">3</td>
+          <td class="m n">₹8–10 L</td>
+          <td class="m">India</td>
+          <td class="m">Wellfound</td>
+          <td class="m n">2026-09-17</td>
+          <td class="m n">35d</td>
+          <td><span class="v v--yes">Screened in</span></td>
+        </tr>
+        <tr>
+          <td class="f">Deserts Digital OU</td>
+          <td>Chief of Staff (EU Operations)</td>
+          <td class="m">Manila / EU</td>
+          <td class="m n">5</td>
+          <td class="m n">—</td>
+          <td class="m">Not offered — kill</td>
+          <td class="m">Wellfound</td>
+          <td class="m n">2026-09-16</td>
+          <td class="m n">36d</td>
+          <td><span class="v v--no">No-go</span> <span class="why">Outside India with no sponsorship stated.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Global HealthX</td>
+          <td>Founder&#x27;s Office</td>
+          <td class="m">Hyderabad</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Crustdata / LinkedIn</td>
+          <td class="m n">2026-09-10</td>
+          <td class="m n">42d</td>
+          <td><span class="v v--yes">Screened in</span></td>
+        </tr>
+        <tr>
+          <td class="f">RagaAI</td>
+          <td>Founder&#x27;s Office – Strategy &amp; Corporate Development</td>
+          <td class="m">Bengaluru (hybrid)</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Crustdata / LinkedIn</td>
+          <td class="m n">2026-09-07</td>
+          <td class="m n">45d</td>
+          <td><span class="v v--yes">Screened in</span></td>
+        </tr>
+        <tr>
+          <td class="f">Richpanel</td>
+          <td>Head of Operations</td>
+          <td class="m">Bengaluru</td>
+          <td class="m n">1</td>
+          <td class="m n">₹60–80 L</td>
+          <td class="m">India</td>
+          <td class="m">Wellfound</td>
+          <td class="m n">2026-09-05</td>
+          <td class="m n">47d</td>
+          <td><span class="v v--yes">Screened in</span></td>
+        </tr>
+        <tr>
+          <td class="f">Darwinbox</td>
+          <td>Chief of Staff</td>
+          <td class="m">Hyderabad</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Crustdata / LinkedIn</td>
+          <td class="m n">2026-08-27</td>
+          <td class="m n">56d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">1,356 headcount, above the 30–500 band.</span></td>
+        </tr>
+        <tr>
+          <td class="f">OpenVector</td>
+          <td>Founder&#x27;s Office – Growth</td>
+          <td class="m">Gurgaon</td>
+          <td class="m n">3</td>
+          <td class="m n">₹12–18 L</td>
+          <td class="m">India</td>
+          <td class="m">Wellfound</td>
+          <td class="m n">2026-08-25</td>
+          <td class="m n">58d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">Second role at OpenVector.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Ripik.AI</td>
+          <td>AVP / VP Chief of Staff</td>
+          <td class="m">Noida</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Crustdata / LinkedIn</td>
+          <td class="m n">2026-08-22</td>
+          <td class="m n">61d</td>
+          <td><span class="v v--no">No-go</span> <span class="why">Seniority likely above band — verify before spending time.</span></td>
+        </tr>
+        <tr>
+          <td class="f">TrueFoundry</td>
+          <td>Founder&#x27;s Office – FDE Team</td>
+          <td class="m">Bengaluru</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Wellfound</td>
+          <td class="m n">2026-08-22</td>
+          <td class="m n">61d</td>
+          <td><span class="v v--no">No-go</span> <span class="why">FDE = forward deployed engineer.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Cube (cubehq.ai)</td>
+          <td>Chief of Staff</td>
+          <td class="m">Bengaluru</td>
+          <td class="m n">2</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Crustdata + Wellfound</td>
+          <td class="m n">2026-08-21</td>
+          <td class="m n">62d</td>
+          <td><span class="v v--yes">Screened in</span></td>
+        </tr>
+        <tr>
+          <td class="f">Dot &amp; Key Skincare</td>
+          <td>Chief of Staff</td>
+          <td class="m">Kolkata</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Crustdata / LinkedIn</td>
+          <td class="m n">2026-08-21</td>
+          <td class="m n">62d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">287 headcount, consumer brand.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Weekday AI (YC W21)</td>
+          <td>Chief of Staff, Office of CEO</td>
+          <td class="m">Hyderabad</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Crustdata / LinkedIn</td>
+          <td class="m n">2026-08-18</td>
+          <td class="m n">65d</td>
+          <td><span class="v v--yes">Screened in</span></td>
+        </tr>
+        <tr>
+          <td class="f">Hopzo Kids</td>
+          <td>Founder&#x27;s Office</td>
+          <td class="m">Gurugram</td>
+          <td class="m n">3</td>
+          <td class="m n">₹10–14 L</td>
+          <td class="m">India</td>
+          <td class="m">Wellfound</td>
+          <td class="m n">2026-08-17</td>
+          <td class="m n">66d</td>
+          <td><span class="v v--yes">Screened in</span></td>
+        </tr>
+        <tr>
+          <td class="f">zime.ai</td>
+          <td>Founder&#x27;s Office – People Success &amp; Operations Lead</td>
+          <td class="m">Gurgaon</td>
+          <td class="m n">4</td>
+          <td class="m n">₹17–25 L</td>
+          <td class="m">India</td>
+          <td class="m">Wellfound</td>
+          <td class="m n">2026-08-17</td>
+          <td class="m n">66d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">People/ops weighted rather than strategy.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Spenza</td>
+          <td>Chief of Staff (Founder&#x27;s Office)</td>
+          <td class="m">Bengaluru</td>
+          <td class="m n">2</td>
+          <td class="m n">₹15–25 L</td>
+          <td class="m">India</td>
+          <td class="m">Wellfound</td>
+          <td class="m n">2026-08-17</td>
+          <td class="m n">66d</td>
+          <td><span class="v v--yes">Screened in</span></td>
+        </tr>
+        <tr>
+          <td class="f">Sciative</td>
+          <td>Chief of Staff to MD&#x27;s Office</td>
+          <td class="m">Navi Mumbai</td>
+          <td class="m n">1</td>
+          <td class="m n">₹10–25 L</td>
+          <td class="m">India</td>
+          <td class="m">Wellfound</td>
+          <td class="m n">2026-08-17</td>
+          <td class="m n">66d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">Wide band; sub-2-yr requirement in scope under the revised seniority filter.</span></td>
+        </tr>
+        <tr>
+          <td class="f">EasyEcom</td>
+          <td>Founder&#x27;s Office Associate / Chief of Staff</td>
+          <td class="m">Bengaluru</td>
+          <td class="m n">1</td>
+          <td class="m n">₹7–10 L</td>
+          <td class="m">India</td>
+          <td class="m">Wellfound</td>
+          <td class="m n">2026-08-17</td>
+          <td class="m n">66d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">Lowest band on the list.</span></td>
+        </tr>
+        <tr>
+          <td class="f">INK IN CAPS</td>
+          <td>Executive Assistant, Founder&#x27;s Office</td>
+          <td class="m">Mumbai</td>
+          <td class="m n">3</td>
+          <td class="m n">₹9–13 L</td>
+          <td class="m">India</td>
+          <td class="m">Wellfound</td>
+          <td class="m n">2026-08-17</td>
+          <td class="m n">66d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">EA-weighted rather than strategy — likely out of scope.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Chat360</td>
+          <td>Founder&#x27;s Office Intern</td>
+          <td class="m">Mumbai</td>
+          <td class="m n">2</td>
+          <td class="m n">₹4–6 L</td>
+          <td class="m">India</td>
+          <td class="m">Wellfound</td>
+          <td class="m n">2026-08-17</td>
+          <td class="m n">66d</td>
+          <td><span class="v v--no">No-go</span> <span class="why">Internship — out of scope.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Formi</td>
+          <td>Chief of Staff</td>
+          <td class="m">Bengaluru</td>
+          <td class="m n">2</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Wellfound</td>
+          <td class="m n">2026-07-17</td>
+          <td class="m n">97d</td>
+          <td><span class="v v--yes">Screened in</span> <span class="why">Nearly three months old — verify still live before tailoring.</span></td>
+        </tr>
+        <tr>
+          <td class="f">Enterpret</td>
+          <td>Technical Program Manager (Founder&#x27;s Office)</td>
+          <td class="m">Bengaluru</td>
+          <td class="m n">—</td>
+          <td class="m n">—</td>
+          <td class="m">India</td>
+          <td class="m">Wellfound</td>
+          <td class="m n">2026-06-19</td>
+          <td class="m n">125d</td>
+          <td><span class="v v--no">No-go</span> <span class="why">Technical PM track.</span></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note">
+      Sample output. Pay shown only where the posting published it. Age is days since posting, as at 22 October 2026.
+      Personal application history is not included.
+    </p>
+  </div>
+</div>
+
+<div class="wrap"><footer><span>Sheryl Lazer</span><a href="index.html">See the rest of the work &rarr;</a></footer></div>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll(".tab"));
+  tabs.forEach(function(t){
+    t.addEventListener("click",function(){
+      tabs.forEach(function(x){
+        x.setAttribute("aria-pressed", x===t ? "true" : "false");
+        document.getElementById("s-"+x.getAttribute("data-s")).hidden = (x!==t);
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
