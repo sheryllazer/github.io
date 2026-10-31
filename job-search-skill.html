@@ -22,7 +22,7 @@ body{background:var(--void);color:var(--text);font-family:var(--font-body);line-
 .band--dots{background-image:var(--dots);background-size:22px 22px}
 h1{font-family:var(--font-display);font-variation-settings:"wdth" 118,"wght" 800;letter-spacing:-0.03em;line-height:1.02;font-size:clamp(2.2rem,5.6vw,3.8rem)}
 .eyebrow{font-family:var(--font-data);font-weight:500;font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-soft)}
-.lede{color:var(--text-soft);font-size:clamp(1rem,2vw,1.1rem);max-width:66ch}
+.lede{color:var(--text-soft);font-size:clamp(1rem,2vw,1.1rem);max-width:none}
 a{color:var(--accent)}
 .back{display:inline-flex;gap:0.5rem;font-family:var(--font-data);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;color:var(--text-soft)}
 .back:hover{color:var(--accent)}
@@ -57,6 +57,8 @@ h1 span,h2 span,h3 span{font-family:var(--font-serif);font-style:italic;text-tra
 .pill,.tab,.reset{border-radius:6px}
 .tab[aria-pressed="true"]{color:var(--cream)}
 .back:hover{color:var(--accent)}
+
+.lede{max-width:none}
 </style>
 </head>
 <body>
@@ -64,8 +66,8 @@ h1 span,h2 span,h3 span{font-family:var(--font-serif);font-style:italic;text-tra
 <div class="band band--dots">
   <div class="wrap">
     <a class="back" href="index.html">&larr; Back to the work</a>
-    <p class="eyebrow" style="margin-top:1.6rem">AI workflow &middot; Sourcing</p>
-    <h1 style="margin-top:0.7rem;max-width:16ch">A sourcing sweep, run as a skill</h1>
+    <p class="eyebrow" style="margin-top:1.6rem">AI skill</p>
+    <h1 style="margin-top:0.7rem">A job search that runs itself</h1>
     <p class="lede" style="margin-top:1.4rem">
       Traditional job boards don&rsquo;t work for the roles I want anymore. The best openings at funds and early-stage startups rarely get posted there, and when they do, they&rsquo;re buried under hundreds of others. So I built my own.
     </p>
@@ -742,10 +744,6 @@ h1 span,h2 span,h3 span{font-family:var(--font-serif);font-style:italic;text-tra
       </table>
     </div>
 
-    <p class="note">
-      Sample output. Pay shown only where the posting published it. Age is days since posting, as at 22 October 2026.
-      Personal application history is not included.
-    </p>
   </div>
 </div>
 

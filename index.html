@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sheryl Lazer</title>
+<title>Sheryl Lazer — Founders build. I find out.</title>
 <meta name="description" content="Market sizing, pricing and competitive work for early-stage consumer brands. Three years from the investor's side of the table — now looking for a founder's office or early core team role.">
 <link rel="canonical" href="https://sheryllazer.github.io/">
 <meta property="og:type" content="website">
@@ -61,7 +61,7 @@ body{
   font-family:var(--font-body);font-size:1rem;line-height:1.5;
   -webkit-font-smoothing:antialiased;
 }
-.wrap{max-width:78rem;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+.wrap{max-width:84rem;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
 .band{padding-block:clamp(3rem,8vw,6.5rem);position:relative}
 .band--dots::before{
   content:"";position:absolute;inset:0;
@@ -412,6 +412,22 @@ h1 span,h2 span,.sline span,.stat .n em{font-family:var(--font-serif);font-style
 .cvlink{color:var(--accent);border-color:var(--accent)}
 .cvlink:hover{color:var(--text);border-color:var(--text)}
 footer{border-color:var(--line)}
+
+.panel__n{font-size:clamp(1.9rem,5vw,2.8rem);line-height:0.98;letter-spacing:-0.02em;text-transform:uppercase}
+.panel__nl{display:flex;align-items:center;gap:0.6rem;margin-top:1rem}
+.panel__nl .cred__txt{opacity:.85}
+.panel__stat{display:inline-block;margin-top:1.1rem;font-family:var(--font-data);font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.35rem 0.7rem;border:1px solid currentColor;border-radius:4px}
+.cred__mark img{height:14px}
+.nowbuild{display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap;margin-top:2.2rem;padding:1.4rem 1.6rem;border:1px dashed var(--line);border-radius:8px;background:var(--void-2)}
+.nowbuild__icon{color:var(--accent);flex:0 0 auto;display:grid;place-items:center;width:64px;height:64px;border-radius:8px;background:var(--void)}
+.nowbuild__txt{flex:1 1 22rem;min-width:0}
+.nowbuild__k{font-family:var(--font-data);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent)}
+.nowbuild__t{font-family:var(--font-serif);font-size:clamp(1.3rem,2.2vw,1.6rem);line-height:1.2;margin-top:0.3rem}
+.nowbuild__s{color:var(--text-soft);margin-top:0.3rem}
+.nowbuild__s em{font-family:var(--font-serif);font-size:1.2em;color:var(--accent)}
+.btn--cal{font-size:0.9rem;padding:1.1rem 1.7rem}
+.panel .eyebrow::before{content:none}
+.cred__mark img[alt="EY"]{height:20px}
 </style>
 </head>
 <body>
@@ -420,7 +436,7 @@ footer{border-color:var(--line)}
   <div class="wrap">
     <div class="hero__grid">
       <div class="hero__text">
-        <h1>The founder's office that <span class="lime">goes and finds out</span>.</h1>
+        <h1>Founders build.<br>I <span class="lime">find out</span>.</h1>
         <div class="hero__tags">
           <span class="pill">Generalist</span>
           <span class="pill">Consumer</span>
@@ -433,7 +449,7 @@ footer{border-color:var(--line)}
       <div class="hero__media">
         <button class="watchcue" type="button" id="watchcue">
           <span class="watchcue__dot" aria-hidden="true"></span>
-          Start here &mdash; 98 seconds
+          Start here
         </button>
         <div class="vwrap" id="vwrap">
           <div class="vbox" id="vbox">
@@ -451,232 +467,219 @@ footer{border-color:var(--line)}
   </div>
 </div>
 
-<!-- ============ SCROLL STAGE ============ -->
-<section class="stage" id="stage" aria-label="What founders get stuck on">
-  <div class="stage__pin">
-    <div class="stage__glow" id="glow"></div>
-    <div class="wrap stage__inner">
-      <div class="stage__lines">
-        <p class="sline on" data-tint="217,178,106">What do we <span class="purp">charge</span>?</p>
-        <p class="sline" data-tint="241,235,223">Which city do we <span class="lime">open</span> next?</p>
-        <p class="sline" data-tint="217,178,106">Who is actually <span class="pump">beating</span> us?</p>
-      </div>
-      <div class="stage__dots" id="sdots" aria-hidden="true"><b class="on"></b><b></b><b></b></div>
-    </div>
-  </div>
-</section>
+
 
 <!-- ============ WORK ============ -->
 <div class="band" id="work">
   <div class="wrap">
     <p class="eyebrow">The work</p>
     <div class="headrow">
-      <h2 style="margin-top:0.7rem">Where can I add value?</h2>
+      <h2 style="margin-top:0.7rem">What I&rsquo;ve <span>found out</span></h2>
       <a class="cvlink" href="Sheryl-Lazer-CV.pdf" download>Download the CV</a>
     </div>
 
     <div class="chips" role="group" aria-label="Filter work by area">
       <button class="chip" type="button" aria-pressed="true" data-f="all">All</button>
-      <button class="chip" type="button" aria-pressed="false" data-f="price">What do I charge?</button>
-      <button class="chip" type="button" aria-pressed="false" data-f="launch">Where next?</button>
-      <button class="chip" type="button" aria-pressed="false" data-f="compete">Who's beating me?</button>
-      <button class="chip" type="button" aria-pressed="false" data-f="bet">Which bet?</button>
-      <button class="chip" type="button" aria-pressed="false" data-f="own">Systems built</button>
-      <button class="chip" type="button" aria-pressed="false" data-f="sell">Can you sell?</button>
+      <button class="chip" type="button" aria-pressed="false" data-f="price">Pricing</button>
+      <button class="chip" type="button" aria-pressed="false" data-f="launch">Expansion</button>
+      <button class="chip" type="button" aria-pressed="false" data-f="compete">Competition</button>
+      <button class="chip" type="button" aria-pressed="false" data-f="bet">Investing</button>
+      <button class="chip" type="button" aria-pressed="false" data-f="own">Operations</button>
+      <button class="chip" type="button" aria-pressed="false" data-f="sell">Sales &amp; BD</button>
     </div>
 
     <div class="tiles" id="tiles">
 
       <button class="tile tile--purple" type="button" data-t="price">
-        <div class="tile__top"><span class="tile__tag">Pricing · Sizing</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <div class="tile__top"><span class="tile__tag">Pricing</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
         <div>
-          <p class="tile__title">The city-tier price curve</p>
-          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/insitor.png" alt="" loading="lazy"></span><span class="cred__txt">Portfolio company · Behavioural health</span></p>
-          <span class="tile__n">Across 3 tiers</span>
-          <p class="tile__q">At what price does this stop being affordable outside the metros?</p>
+          <p class="tile__title">Sizing child therapy in India, city by city</p>
+          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/insitor.png" alt="Insitor" loading="lazy"></span><span class="cred__txt">Portfolio company · Child behavioural therapy</span></p>
+          <span class="tile__n">₹206 Bn</span>
+          <p class="tile__q">How many families can afford behavioural therapy for their child, and what will they pay in each city tier?</p>
         </div>
         <div class="casedata"
-          data-q="At what price does this stop being affordable outside the metros?"
-          data-s1="Segmented urban households by tier and layered income distribution over each."
-          data-s2="Set a share-of-wallet ceiling, then solved for addressable households across a price range."
-          data-s3="A price-to-market curve per tier — turning an argument into a number."
-          data-across="Pricing a new SKU for metro and non-metro customers."></div>
+          data-q="How many families can afford behavioural therapy for their child, and what will they pay in each city tier?"
+          data-s1="Started from India’s 366 million children and split them across metros, tier-1 cities, tier-2 cities and developed rural areas."
+          data-s2="Narrowed that down to children likely to need therapy, families who seek a diagnosis, and households earning over ₹4 lakh a year."
+          data-s3="Set a price per session for each tier, from ₹1,200 in metros to ₹600 in tier-2 cities, at 10 sessions a month. The market came to about ₹206 billion a year (roughly $2.3 billion)."
+          data-across="Pricing a new service differently for big cities and smaller towns."></div>
       </button>
 
       <button class="tile tile--lime" type="button" data-t="price">
-        <div class="tile__top"><span class="tile__tag">Market entry</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <div class="tile__top"><span class="tile__tag">Pricing</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
         <div>
-          <p class="tile__title">Market entry, secured lending</p>
-          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/insitor.png" alt="" loading="lazy"></span><span class="cred__txt">Portfolio company · NBFC lending</span></p>
-          <span class="tile__n">₹14.4 Tn</span>
-          <p class="tile__q">Should we enter this product, at what price, and to whom?</p>
+          <p class="tile__title">Should a lender launch secured loans?</p>
+          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/insitor.png" alt="Insitor" loading="lazy"></span><span class="cred__txt">Portfolio company · Lending</span></p>
+          <span class="tile__n">₹14.4 Tn market</span>
+          <p class="tile__q">Should we launch this loan product, at what price, and for which customers?</p>
         </div>
         <div class="casedata"
-          data-q="Should we enter this product, at what price, and to whom?"
-          data-s1="Reconstructed the top five competitors' unit economics from public filings."
-          data-s2="Mapped pricing by customer segment, ticket size and tenure."
-          data-s3="A roadmap with target segment, price band and margin structure — plus a lower-risk co-lending route in."
-          data-across="Entering a new category: who is already there, and at what price."></div>
+          data-q="Should we launch this loan product, at what price, and for which customers?"
+          data-s1="Rebuilt the top five competitors’ economics from their public filings."
+          data-s2="Mapped how they price by customer type, loan size and loan length."
+          data-s3="A launch plan with the target customer, price band and margins, plus a lower-risk way in through co-lending."
+          data-across="Entering a new category: who’s already there, and what they charge."></div>
       </button>
 
       <button class="tile tile--pump" type="button" data-t="compete">
-        <div class="tile__top"><span class="tile__tag">Growth strategy</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <div class="tile__top"><span class="tile__tag">Competition</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
         <div>
-          <p class="tile__title">Two growth bets, one budget</p>
-          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/insitor.png" alt="" loading="lazy"></span><span class="cred__txt">Portfolio company · Education</span></p>
-          <span class="tile__n">$62.8 Bn</span>
-          <p class="tile__q">Two credible growth bets, budget for one. Which?</p>
+          <p class="tile__title">Picking one growth bet out of two</p>
+          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/insitor.png" alt="Insitor" loading="lazy"></span><span class="cred__txt">Portfolio company · Education</span></p>
+          <span class="tile__n">$62.8 Bn market</span>
+          <p class="tile__q">Two good ways to grow, and budget for one. Which one?</p>
         </div>
         <div class="casedata"
-          data-q="Two credible growth bets, budget for one. Which?"
-          data-s1="Sized both opportunities and mapped six competitors on model, pricing and geography."
-          data-s2="Scored each on reachable market, time to revenue, and fit with existing strengths."
-          data-s3="One recommended — and the rejected option written up properly, so it could be revisited."
+          data-q="Two good ways to grow, and budget for one. Which one?"
+          data-s1="Sized both markets and mapped six competitors on business model, price and geography."
+          data-s2="Scored each option on market size, time to revenue and fit with what the company already does well."
+          data-s3="A clear recommendation, with the other option written up so it could be picked up later."
           data-across="Choosing between two growth bets on one budget."></div>
       </button>
 
       <button class="tile tile--void" type="button" data-t="compete">
-        <div class="tile__top"><span class="tile__tag">Competitive</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <div class="tile__top"><span class="tile__tag">Competition</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
         <div>
-          <p class="tile__title">Responding to a market shift</p>
-          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/insitor.png" alt="" loading="lazy"></span><span class="cred__txt">Portfolio company · HR SaaS</span></p>
-          <span class="tile__n">8+ players</span>
-          <p class="tile__q">The category is shifting. What does it cost us to follow, or not to?</p>
+          <p class="tile__title">Responding when the market shifts</p>
+          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/insitor.png" alt="Insitor" loading="lazy"></span><span class="cred__txt">Portfolio company · HR software</span></p>
+          <span class="tile__n">8+ competitors</span>
+          <p class="tile__q">The market is changing. What does it cost to follow, or to stay put?</p>
         </div>
         <div class="casedata"
-          data-q="The category is shifting. What does it cost us to follow, or not to?"
-          data-s1="Separated stated intent from shipped product across the competitive set."
-          data-s2="Mapped how each monetises, then costed capex and return on every possible response."
-          data-s3="A risk-and-opportunity map used at board level to decide what to build and what to reprice."
-          data-across="A new entrant undercuts you: follow, or hold your price."></div>
+          data-q="The market is changing. What does it cost to follow, or to stay put?"
+          data-s1="Separated what competitors said they would build from what they actually shipped."
+          data-s2="Mapped how each one makes money, then costed every possible response."
+          data-s3="A map of risks and options that the board used to decide what to build and what to reprice."
+          data-across="A new rival undercuts you: match the price, or hold."></div>
       </button>
 
       <button class="tile tile--pump" type="button" data-t="price">
         <div class="tile__top"><span class="tile__tag">Pricing</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
         <div>
-          <p class="tile__title">A pricing architecture</p>
-          <p class="tile__sub cred"><span class="cred__mark cred__mark--txt">EY</span><span class="cred__txt">Client engagement · Banking</span></p>
-          <span class="tile__n">120+</span>
-          <p class="tile__q">What should we charge, given what comparable players charge?</p>
+          <p class="tile__title">Setting prices against 120+ rivals</p>
+          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/ey.png" alt="EY" loading="lazy"></span><span class="cred__txt">Client project · Banking</span></p>
+          <span class="tile__n">120+ compared</span>
+          <p class="tile__q">What should we charge, given what similar players charge?</p>
         </div>
         <div class="casedata"
-          data-q="What should we charge, given what comparable players charge?"
-          data-s1="Built a service taxonomy first, so prices were compared like for like."
-          data-s2="Benchmarked 16+ global players across five verticals — operations, structure, product, pricing, regulation."
-          data-s3="A reusable pricing framework."
-          data-across="Designing tiers and bundles when rivals package differently."></div>
+          data-q="What should we charge, given what similar players charge?"
+          data-s1="Listed every service first, so prices were compared like for like."
+          data-s2="Benchmarked 16+ global players on operations, structure, product, pricing and regulation."
+          data-s3="A pricing framework the client could reuse."
+          data-across="Designing plans and bundles when rivals package them differently."></div>
       </button>
 
       <button class="tile tile--purple" type="button" data-t="launch">
         <div class="tile__top"><span class="tile__tag">Expansion</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
         <div>
-          <p class="tile__title">Site selection and launch case</p>
-          <p class="tile__sub cred"><span class="cred__mark cred__mark--txt">180DC</span><span class="cred__txt">Client engagement · US non-profit</span></p>
-          <span class="tile__n">10/10</span>
-          <p class="tile__q">Where exactly do we open — and should we go ahead at all?</p>
+          <p class="tile__title">Choosing where to open next</p>
+          <p class="tile__sub cred"><span class="cred__mark cred__mark--txt">180DC</span><span class="cred__txt">Client project · US non-profit</span></p>
+          <span class="tile__n">Rated 10/10</span>
+          <p class="tile__q">Where exactly should we open, and should we open at all?</p>
         </div>
         <div class="casedata"
-          data-q="Where exactly do we open — and should we go ahead at all?"
-          data-s1="Led a team of eight; built screening criteria for catchment and access."
-          data-s2="Scored every candidate site, costed fit-out and ramp for the shortlist."
-          data-s3="A ranked shortlist with a go-to-market plan and a modelled path to breakeven."
-          data-across="Picking the first store, dark store or city to concentrate spend in."></div>
+          data-q="Where exactly should we open, and should we open at all?"
+          data-s1="Led a team of eight and set the rules for judging each location."
+          data-s2="Scored every option, then costed set-up and ramp-up for the shortlist."
+          data-s3="A ranked shortlist, a launch plan and a path to breakeven. The client rated it 10/10."
+          data-across="Picking the first store, dark store or city to spend in."></div>
       </button>
 
       <button class="tile tile--lime" type="button" data-t="own">
-        <div class="tile__top"><span class="tile__tag">Operations · AI</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <div class="tile__top"><span class="tile__tag">Operations</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
         <div>
-          <p class="tile__title">Reporting that stopped being manual</p>
-          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/insitor.png" alt="" loading="lazy"></span><span class="cred__txt">Fund-wide · Operations</span></p>
-          <span class="tile__n">80%</span>
-          <p class="tile__q">Every holding reports differently, every quarter, by hand. How do we stop?</p>
+          <p class="tile__title">Turning manual reports into automatic ones</p>
+          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/insitor.png" alt="Insitor" loading="lazy"></span><span class="cred__txt">Fund-wide · Operations</span></p>
+          <span class="tile__n">80% faster</span>
+          <p class="tile__q">Every company reports differently, every quarter, by hand. How do we fix it?</p>
         </div>
         <div class="casedata"
-          data-q="Every holding reports differently, every quarter, by hand. How do we stop?"
-          data-s1="Standardised the reporting mechanism for internal evaluation and LP reporting."
-          data-s2="Set the business outlook, the valuation approach and the KPIs worth tracking, then built the pipeline that normalises whatever arrives and generates the pack."
-          data-s3="80% faster turnaround, documented so others could run it. Became the firm's standard process."
-          data-across="One view of the numbers when they live in six tools."></div>
+          data-q="Every company reports differently, every quarter, by hand. How do we fix it?"
+          data-s1="Agreed one reporting format for internal reviews and investor updates."
+          data-s2="Picked the numbers worth tracking and built a pipeline that cleans whatever comes in and produces the report."
+          data-s3="Reports now take 80% less time, and the process became the firm’s standard."
+          data-across="One view of the numbers when they live in six different tools."></div>
       </button>
 
       <button class="tile tile--void" type="button" data-t="own">
-        <div class="tile__top"><span class="tile__tag">Team · Process</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <div class="tile__top"><span class="tile__tag">Operations</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
         <div>
-          <p class="tile__title">Built the delivery engine</p>
-          <p class="tile__sub cred"><span class="cred__mark cred__mark--txt">180DC</span><span class="cred__txt">In-house · Consulting</span></p>
-          <span class="tile__n">20+</span>
-          <p class="tile__q">How do you get consistent output from a team that changes every year?</p>
+          <p class="tile__title">Keeping quality high as the team changes</p>
+          <p class="tile__sub cred"><span class="cred__mark cred__mark--txt">180DC</span><span class="cred__txt">In-house · Consulting club</span></p>
+          <span class="tile__n">20+ people</span>
+          <p class="tile__q">How do you keep the work good when the team changes every year?</p>
         </div>
         <div class="casedata"
-          data-q="How do you get consistent output from a team that changes every year?"
-          data-s1="Standardised scoping and research design across every engagement."
-          data-s2="Set a quality gate before anything reached a client."
-          data-s3="A knowledge base so each cohort started from the last one's work. Client scores of 9 and 10 out of 10."
-          data-across="Turning a founder-held process into something the team runs."></div>
+          data-q="How do you keep the work good when the team changes every year?"
+          data-s1="Standardised how every project was scoped and researched."
+          data-s2="Added a quality check before anything went to a client."
+          data-s3="A shared knowledge base so each new team built on the last one. Clients rated the work 9 and 10 out of 10."
+          data-across="Turning a process that lives in the founder’s head into one the team can run."></div>
       </button>
 
       <button class="tile tile--purple" type="button" data-t="sell">
-        <div class="tile__top"><span class="tile__tag">BD · Pipeline</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <div class="tile__top"><span class="tile__tag">Sales &amp; BD</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
         <div>
-          <p class="tile__title">Pipeline and two roadshows</p>
-          <p class="tile__sub cred"><span class="cred__mark cred__mark--txt">T&amp;A</span><span class="cred__txt">New Jersey EDA · Inbound investment</span></p>
-          <span class="tile__n">150+</span>
-          <p class="tile__q">Who are the 150 right targets, and how do we get them in a room?</p>
+          <p class="tile__title">Getting 150 investors into the room</p>
+          <p class="tile__sub cred"><span class="cred__mark cred__mark--txt">T&amp;A</span><span class="cred__txt">New Jersey economic development agency</span></p>
+          <span class="tile__n">150+ targets</span>
+          <p class="tile__q">Who are the right 150 investors, and how do we get them to show up?</p>
         </div>
         <div class="casedata"
-          data-q="Who are the 150 right targets, and how do we get them in a room?"
-          data-s1="Set the qualifying criteria and screened against them."
-          data-s2="Ran the outreach across the qualified list."
-          data-s3="Two live investor roadshows delivered end to end, as one of three holding a government mandate."
-          data-across="Building a retail, distribution or partnership pipeline from scratch."></div>
+          data-q="Who are the right 150 investors, and how do we get them to show up?"
+          data-s1="Set the criteria and screened the list against them."
+          data-s2="Ran outreach to everyone who qualified."
+          data-s3="Delivered two live investor roadshows end to end, as one of three firms on the government mandate."
+          data-across="Building a sales, distribution or partner pipeline from scratch."></div>
       </button>
 
       <button class="tile tile--pump" type="button" data-t="sell">
-        <div class="tile__top"><span class="tile__tag">Growth · Community</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <div class="tile__top"><span class="tile__tag">Sales &amp; BD</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
         <div>
-          <p class="tile__title">Grew a cohort from zero</p>
-          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/gsf.png" alt="" loading="lazy"></span><span class="cred__txt">In-house · Early-stage VC</span></p>
-          <span class="tile__n">1,000+</span>
-          <p class="tile__q">How do you fill a programme and build a network from a standing start?</p>
+          <p class="tile__title">Building an investor network from zero</p>
+          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/gsf.png" alt="GSF" loading="lazy"></span><span class="cred__txt">In-house · Early-stage VC</span></p>
+          <span class="tile__n">1,000+ investors</span>
+          <p class="tile__q">How do you fill a programme and build a network from nothing?</p>
         </div>
         <div class="casedata"
-          data-q="How do you fill a programme and build a network from a standing start?"
-          data-s1="Built the investor target list for the Founder&#39;s Academy demo day."
-          data-s2="Ran outreach tailored by investor type, and managed relationships with college e-cells."
-          data-s3="A 150+ cohort and a 1,000-strong investor database."
-          data-across="Filling a community or founding-customer list from zero."></div>
+          data-q="How do you fill a programme and build a network from nothing?"
+          data-s1="Built the investor list for the Founder’s Academy demo day."
+          data-s2="Tailored outreach to each type of investor and worked with college entrepreneurship cells."
+          data-s3="A cohort of 150+ founders and a database of 1,000 investors."
+          data-across="Filling a community or first-customer list from zero."></div>
       </button>
 
       <button class="tile tile--lime" type="button" data-t="bet">
-        <div class="tile__top"><span class="tile__tag">Screening</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <div class="tile__top"><span class="tile__tag">Investing</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
         <div>
-          <p class="tile__title">What good looks like, early</p>
-          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/gsf.png" alt="" loading="lazy"></span><span class="cred__txt">Deal screening · ConsumerTech</span></p>
-          <span class="tile__n">200+</span>
-          <p class="tile__q">Of 200 companies, which 10 are worth a conversation — and on what evidence?</p>
+          <p class="tile__title">Spotting the startups worth backing</p>
+          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/gsf.png" alt="GSF" loading="lazy"></span><span class="cred__txt">Deal screening · Consumer tech</span></p>
+          <span class="tile__n">200+ startups</span>
+          <p class="tile__q">Of 200 companies, which 10 deserve a meeting, and why?</p>
         </div>
         <div class="casedata"
-          data-q="Of 200 companies, which 10 are worth a conversation — and on what evidence?"
-          data-s1="Owned consumer-sector deal flow end to end."
-          data-s2="Evaluated 200+ startups on market attractiveness alongside the financials."
-          data-s3="Five transactions worked on, for cheques up to USD 300K."
-          data-across="Judging whether a consumer business is actually working."></div>
+          data-q="Of 200 companies, which 10 deserve a meeting, and why?"
+          data-s1="Owned the consumer deal flow end to end."
+          data-s2="Judged 200+ startups on their market and their numbers."
+          data-s3="Worked on five deals, with cheques of up to $300K."
+          data-across="Telling whether a consumer business is really working."></div>
       </button>
 
       <button class="tile tile--void" type="button" data-t="bet">
-        <div class="tile__top"><span class="tile__tag">Modelling</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <div class="tile__top"><span class="tile__tag">Investing</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
         <div>
-          <p class="tile__title">Models that explain the movement</p>
-          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/tresvista.png" alt="" loading="lazy"></span><span class="cred__txt">Client engagement · Private credit</span></p>
-          <span class="tile__n">$10 Bn</span>
-          <p class="tile__q">The number moved. Which driver moved it, and by how much?</p>
+          <p class="tile__title">Explaining why the numbers moved</p>
+          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/tresvista.png" alt="TresVista" loading="lazy"></span><span class="cred__txt">Client project · Private credit</span></p>
+          <span class="tile__n">$10 Bn portfolio</span>
+          <p class="tile__q">The number changed. What changed it, and by how much?</p>
         </div>
         <div class="casedata"
-          data-q="The number moved. Which driver moved it, and by how much?"
-          data-s1="Built models structured so variance decomposes by driver, not by hindsight."
-          data-s2="Maintained them through quarterly cycles across the portfolio."
-          data-s3="Quarter-over-quarter analysis that attributed movement to causes, client-ready."
-          data-across="Answering &quot;why did CAC move&quot; in an hour, not a week."></div>
+          data-q="The number changed. What changed it, and by how much?"
+          data-s1="Built models that break every change down by its cause."
+          data-s2="Kept them up to date every quarter across the portfolio."
+          data-s3="Client-ready quarterly reports showing what drove each change."
+          data-across="Answering “why did our cost per customer go up?” in an hour, not a week."></div>
       </button>
 
     </div>
@@ -687,9 +690,9 @@ footer{border-color:var(--line)}
 <!-- ============ ARTEFACTS ============ -->
 <div class="band band--raised">
   <div class="wrap">
-    <p class="eyebrow">Open the actual work</p>
-    <h2 style="margin-top:0.7rem;max-width:20ch">Three things I built with AI</h2>
-    <p class="lede" style="margin-top:1.3rem">All three are live artefacts.</p>
+    <p class="eyebrow">Built with AI</p>
+    <h2 style="margin-top:0.7rem;max-width:20ch">Things I&rsquo;ve built with <span>AI</span></h2>
+    <p class="lede" style="margin-top:1.3rem">Two working tools and one AI skill. Open any of them and try it.</p>
     <div class="arts">
 
       <a class="art" href="ridehailing.html">
@@ -704,9 +707,9 @@ footer{border-color:var(--line)}
           </svg>
         </div>
         <div class="art__body">
-          <div class="art__top"><span class="art__tag">Market sizing &middot; AI-built</span><span class="art__arrow">&#8599;</span></div>
-          <p class="art__title">India ride-hailing, to 2030</p>
-          <p class="art__sub">India&rsquo;s ride-hailing market sized from the ground up to 2030.</p>
+          <div class="art__top"><span class="art__tag">Market model</span><span class="art__arrow">&#8599;</span></div>
+          <p class="art__title">How big will ride-hailing in India be by 2030?</p>
+          <p class="art__sub">A city-by-city model of rides and fares. Change the inputs and the total updates.</p>
           <p class="art__meta"><span>$14.3&nbsp;Bn by 2030</span><span>Within 2.8% of 2025 actuals</span></p>
         </div>
       </a>
@@ -726,10 +729,10 @@ footer{border-color:var(--line)}
           </svg>
         </div>
         <div class="art__body">
-          <div class="art__top"><span class="art__tag">Reporting &middot; Standardisation</span><span class="art__arrow">&#8599;</span></div>
-          <p class="art__title">The PortCo reporting template</p>
-          <p class="art__sub">One reporting format every portfolio company files into.</p>
-          <p class="art__meta"><span>Adopted firm-wide</span><span>Illustrative figures</span></p>
+          <div class="art__top"><span class="art__tag">Reporting tool</span><span class="art__arrow">&#8599;</span></div>
+          <p class="art__title">One report format for every portfolio company</p>
+          <p class="art__sub">Every company reports the same numbers the same way, so nothing needs chasing.</p>
+          <p class="art__meta"><span>Adopted firm-wide</span><span>Sample figures</span></p>
         </div>
       </a>
 
@@ -748,13 +751,22 @@ footer{border-color:var(--line)}
           </svg>
         </div>
         <div class="art__body">
-          <div class="art__top"><span class="art__tag">AI workflow &middot; Sourcing</span><span class="art__arrow">&#8599;</span></div>
-          <p class="art__title">A sourcing pipeline as a skill</p>
-          <p class="art__sub">A sourcing sweep that screens and scores every opening against stated criteria.</p>
-          <p class="art__meta"><span>Five stages</span><span>53 roles screened</span></p>
+          <div class="art__top"><span class="art__tag">AI skill</span><span class="art__arrow">&#8599;</span></div>
+          <p class="art__title">A job search that runs itself</p>
+          <p class="art__sub">Finds openings at funds and startups, scores each one, and flags which to skip.</p>
+          <p class="art__meta"><span>5 steps</span><span>53 roles screened</span></p>
         </div>
       </a>
 
+    </div>
+    <div class="nowbuild rv">
+      <span class="nowbuild__icon" aria-hidden="true"><svg viewBox="0 0 48 48" width="48" height="48"><rect x="4" y="14" width="40" height="28" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M4 14 L10 5 L18 14 M18 14 L24 5 L32 14 M32 14 L38 5 L44 14" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M20 22 L31 28 L20 34 Z" fill="currentColor"/></svg></span>
+      <div class="nowbuild__txt">
+        <span class="nowbuild__k">Now building</span>
+        <p class="nowbuild__t">An AI video editor, built on Claude. The intro video above is its first cut.</p>
+        <p class="nowbuild__s">Curious how it works? Only one way to <em>find out</em>.</p>
+      </div>
+      <a class="btn nowbuild__btn" href="https://calendly.com/sheryllazer-g_il/30min" target="_blank" rel="noopener">Book a call &#8599;</a>
     </div>
   </div>
 </div>
@@ -762,7 +774,7 @@ footer{border-color:var(--line)}
 <!-- ============ NEEDS ============ -->
 <div class="band">
   <div class="wrap">
-    <h2 style="margin-top:0.7rem;max-width:15ch">Someone to just go and find out</h2>
+    <h2 style="margin-top:0.7rem">What founders <span>hand me</span></h2>
     <div class="needs">
       <div class="need rv">
         <h3 class="purp">Market &amp; sizing</h3>
@@ -797,7 +809,10 @@ footer{border-color:var(--line)}
   <div class="wrap">
     <p class="eyebrow">Next</p>
     <h2 style="margin-top:0.7rem">Let&rsquo;s <span class="pump">talk.</span></h2>
-    <div class="cta">
+    <p class="lede" style="margin-top:1.2rem">Thirty minutes. Bring the problem, I&rsquo;ll bring the questions.</p>
+    <p style="margin-top:1.4rem"><a class="btn btn--cal" href="https://calendly.com/sheryllazer-g_il/30min" target="_blank" rel="noopener">Book a coffee chat &#8599;</a></p>
+    <p class="cvline" style="margin-top:2rem"><span>Or reach me directly</span></p>
+    <div class="cta" style="margin-top:0.8rem">
       <span class="mail" id="mail">sheryllazer@gmail.com</span>
       <button class="btn" type="button" id="copy">Copy address</button>
     </div>
@@ -821,16 +836,17 @@ footer{border-color:var(--line)}
   <div class="panel__body">
     <div class="panel__head" id="phead">
       <span class="panel__n" id="pn">—</span>
-      <span class="panel__nl" id="pnl">—</span>
+      <span class="panel__nl cred" id="pnl">—</span>
+      <span class="panel__stat" id="pstat">—</span>
       <h2 class="panel__q" id="pq">—</h2>
     </div>
     <div class="panel__main">
       <ol class="steps st">
-        <li><div><span class="lab">Diagnostic</span><span class="txt" id="ps1">—</span></div></li>
-        <li><div><span class="lab">Approach</span><span class="txt" id="ps2">—</span></div></li>
-        <li><div><span class="lab">Impact</span><span class="txt" id="ps3">—</span></div></li>
+        <li><div><span class="lab">Where I started</span><span class="txt" id="ps1">—</span></div></li>
+        <li><div><span class="lab">What I did</span><span class="txt" id="ps2">—</span></div></li>
+        <li><div><span class="lab">What came out of it</span><span class="txt" id="ps3">—</span></div></li>
       </ol>
-      <div class="across"><span class="lab">Usecases</span><span class="txt" id="pacross">&mdash;</span></div>
+      <div class="across"><span class="lab">Where this helps a founder</span><span class="txt" id="pacross">&mdash;</span></div>
     </div>
   </div>
 </aside>
@@ -840,39 +856,6 @@ footer{border-color:var(--line)}
   "use strict";
   document.body.classList.add("js");
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  /* ---------- scroll stage ---------- */
-  var stage = document.getElementById("stage");
-  var lines = Array.prototype.slice.call(stage.querySelectorAll(".sline"));
-  var dots = Array.prototype.slice.call(document.querySelectorAll("#sdots b"));
-  var glow = document.getElementById("glow");
-  var current = -1;
-
-  function setLine(i){
-    if (i === current) return;
-    current = i;
-    lines.forEach(function(l, n){ l.classList.toggle("on", n === i); });
-    dots.forEach(function(b, n){ b.classList.toggle("on", n === i); });
-    var tint = lines[i].getAttribute("data-tint") || "217,178,106";
-    glow.style.background = "radial-gradient(circle,rgba(" + tint + ",.20),transparent 62%)";
-  }
-
-  function onScroll(){
-    var r = stage.getBoundingClientRect();
-    var span = stage.offsetHeight - window.innerHeight;
-    if (span <= 0) { setLine(0); return; }
-    var p = Math.min(Math.max(-r.top / span, 0), 0.9999);
-    setLine(Math.floor(p * lines.length));
-  }
-
-  if (reduce){
-    lines.forEach(function(l){ l.classList.add("on"); });
-  } else {
-    window.addEventListener("scroll", onScroll, { passive:true });
-    window.addEventListener("resize", onScroll);
-    onScroll();
-    setLine(0);
-  }
 
   /* ---------- reveal + count ---------- */
   var revealEls = Array.prototype.slice.call(document.querySelectorAll(".rv"));
@@ -935,8 +918,9 @@ footer{border-color:var(--line)}
     var d = tile.querySelector(".casedata"), shade = "void";
     SHADES.forEach(function(s){ if (tile.classList.contains("tile--" + s)) shade = s; });
     document.getElementById("ptag").textContent = tile.querySelector(".tile__tag").textContent;
-    document.getElementById("pn").textContent = tile.querySelector(".tile__n").textContent;
-    document.getElementById("pnl").textContent = tile.querySelector(".tile__sub").textContent;
+    document.getElementById("pn").textContent = tile.querySelector(".tile__title").textContent;
+    document.getElementById("pnl").innerHTML = tile.querySelector(".tile__sub").innerHTML;
+    document.getElementById("pstat").textContent = tile.querySelector(".tile__n").textContent;
     document.getElementById("pq").textContent = d.getAttribute("data-q");
     document.getElementById("ps1").textContent = d.getAttribute("data-s1");
     document.getElementById("ps2").textContent = d.getAttribute("data-s2");
