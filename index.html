@@ -431,6 +431,18 @@ footer{border-color:var(--line)}
 .cred__mark img[alt="EY"]{height:20px}
 .cred__mark img[alt="180 Degrees Consulting"]{height:24px}
 .cred__mark img[alt="T&A Consulting"]{height:15px}
+
+.tile__logo{margin-top:0.9rem}
+.tile__logo .cred__mark{height:30px;padding:0 10px}
+.tile .tile__n{font-size:1.05rem;letter-spacing:-0.01em;margin-top:0.6rem}
+.tile__title{margin-top:0}
+.panel__nl .cred__mark{height:30px;padding:0 10px}
+.chip--ai{text-decoration:none;background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.chip--ai:hover{background:var(--accent);border-color:var(--accent);color:var(--cream)}
+html{scroll-behavior:smooth}
+.tile{justify-content:flex-start}
+.tile>div:not(.tile__top):not(.casedata){margin-top:auto}
+.tile__logo{margin-top:0.6rem!important}
 </style>
 </head>
 <body>
@@ -487,17 +499,18 @@ footer{border-color:var(--line)}
       <button class="chip" type="button" aria-pressed="false" data-f="launch">Expansion</button>
       <button class="chip" type="button" aria-pressed="false" data-f="compete">Competition</button>
       <button class="chip" type="button" aria-pressed="false" data-f="bet">Investing</button>
-      <button class="chip" type="button" aria-pressed="false" data-f="own">Build systems or processes</button>
+      <button class="chip" type="button" aria-pressed="false" data-f="own">Systems built</button>
       <button class="chip" type="button" aria-pressed="false" data-f="sell">Sales &amp; BD</button>
+      <a class="chip chip--ai" href="#ai">Built with AI &darr;</a>
     </div>
 
     <div class="tiles" id="tiles">
 
       <button class="tile tile--purple" type="button" data-t="price">
         <div class="tile__top"><span class="tile__tag">Pricing</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <p class="tile__sub cred tile__logo"><span class="cred__mark"><img src="logos/insitor.png" alt="Insitor" loading="lazy"></span></p>
         <div>
           <p class="tile__title">Market sizing for child behavioural therapy in India</p>
-          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/insitor.png" alt="Insitor" loading="lazy"></span><span class="cred__txt">Portfolio company · Child behavioural therapy</span></p>
           <span class="tile__n">INR 206 Bn market size</span>
           <p class="tile__q">How many families can afford behavioural therapy for their child, and what will they pay in each city tier?</p>
         </div>
@@ -511,9 +524,9 @@ footer{border-color:var(--line)}
 
       <button class="tile tile--lime" type="button" data-t="price">
         <div class="tile__top"><span class="tile__tag">Pricing</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <p class="tile__sub cred tile__logo"><span class="cred__mark"><img src="logos/insitor.png" alt="Insitor" loading="lazy"></span></p>
         <div>
           <p class="tile__title">Go-to-market entry into secured lending for an NBFC</p>
-          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/insitor.png" alt="Insitor" loading="lazy"></span><span class="cred__txt">Portfolio company · NBFC</span></p>
           <span class="tile__n">INR 14.4 Tn market size</span>
           <p class="tile__q">Should we launch this loan product, at what price, and for which customers?</p>
         </div>
@@ -527,9 +540,9 @@ footer{border-color:var(--line)}
 
       <button class="tile tile--pump" type="button" data-t="compete">
         <div class="tile__top"><span class="tile__tag">Competition</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <p class="tile__sub cred tile__logo"><span class="cred__mark"><img src="logos/insitor.png" alt="Insitor" loading="lazy"></span></p>
         <div>
           <p class="tile__title">Growth strategy for an education company</p>
-          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/insitor.png" alt="Insitor" loading="lazy"></span><span class="cred__txt">Portfolio company · Education</span></p>
           <span class="tile__n">USD 62.8 Bn market size</span>
           <p class="tile__q">Two good ways to grow, and budget for one. Which one?</p>
         </div>
@@ -543,9 +556,9 @@ footer{border-color:var(--line)}
 
       <button class="tile tile--void" type="button" data-t="compete">
         <div class="tile__top"><span class="tile__tag">Competition</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <p class="tile__sub cred tile__logo"><span class="cred__mark"><img src="logos/insitor.png" alt="Insitor" loading="lazy"></span></p>
         <div>
           <p class="tile__title">AI risks and opportunities for an HR SaaS company</p>
-          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/insitor.png" alt="Insitor" loading="lazy"></span><span class="cred__txt">Portfolio company · HR SaaS</span></p>
           <span class="tile__n">8 HR SaaS players benchmarked</span>
           <p class="tile__q">Competitors are already shipping AI. Where does that leave the company, and where should it build next?</p>
         </div>
@@ -559,9 +572,9 @@ footer{border-color:var(--line)}
 
       <button class="tile tile--pump" type="button" data-t="price">
         <div class="tile__top"><span class="tile__tag">Pricing</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <p class="tile__sub cred tile__logo"><span class="cred__mark"><img src="logos/ey.png" alt="EY" loading="lazy"></span></p>
         <div>
           <p class="tile__title">New service design: catching overcharges for banking clients</p>
-          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/ey.png" alt="EY" loading="lazy"></span><span class="cred__txt">Client project · Banking</span></p>
           <span class="tile__n">16+ global players benchmarked</span>
           <p class="tile__q">Where are clients being charged wrongly or billed twice for the same service, and can catching it become a new offering?</p>
         </div>
@@ -575,9 +588,9 @@ footer{border-color:var(--line)}
 
       <button class="tile tile--purple" type="button" data-t="launch">
         <div class="tile__top"><span class="tile__tag">Expansion</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <p class="tile__sub cred tile__logo"><span class="cred__mark"><img src="logos/180dc.png" alt="180 Degrees Consulting" loading="lazy"></span></p>
         <div>
           <p class="tile__title">Site selection and launch plan for a US non-profit</p>
-          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/180dc.png" alt="180 Degrees Consulting" loading="lazy"></span><span class="cred__txt">Client project · US non-profit</span></p>
           <span class="tile__n">10/10 client rating</span>
           <p class="tile__q">Where exactly should we open, and should we open at all?</p>
         </div>
@@ -590,10 +603,10 @@ footer{border-color:var(--line)}
       </button>
 
       <button class="tile tile--lime" type="button" data-t="own">
-        <div class="tile__top"><span class="tile__tag">Build systems or processes</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <div class="tile__top"><span class="tile__tag">Systems built</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <p class="tile__sub cred tile__logo"><span class="cred__mark"><img src="logos/insitor.png" alt="Insitor" loading="lazy"></span></p>
         <div>
           <p class="tile__title">Automated portfolio reporting across a fund</p>
-          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/insitor.png" alt="Insitor" loading="lazy"></span><span class="cred__txt">Fund-wide · Operations</span></p>
           <span class="tile__n">80% less reporting time</span>
           <p class="tile__q">Every company reports differently, every quarter, by hand. How do we fix it?</p>
         </div>
@@ -606,10 +619,10 @@ footer{border-color:var(--line)}
       </button>
 
       <button class="tile tile--void" type="button" data-t="own">
-        <div class="tile__top"><span class="tile__tag">Build systems or processes</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <div class="tile__top"><span class="tile__tag">Systems built</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <p class="tile__sub cred tile__logo"><span class="cred__mark"><img src="logos/180dc.png" alt="180 Degrees Consulting" loading="lazy"></span></p>
         <div>
           <p class="tile__title">Delivery and quality process for a consulting team</p>
-          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/180dc.png" alt="180 Degrees Consulting" loading="lazy"></span><span class="cred__txt">In-house · Consulting club</span></p>
           <span class="tile__n">20+ person team</span>
           <p class="tile__q">How do you keep the work good when the team changes every year?</p>
         </div>
@@ -623,9 +636,9 @@ footer{border-color:var(--line)}
 
       <button class="tile tile--purple" type="button" data-t="sell">
         <div class="tile__top"><span class="tile__tag">Sales &amp; BD</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <p class="tile__sub cred tile__logo"><span class="cred__mark"><img src="logos/ta.png" alt="T&amp;A Consulting" loading="lazy"></span></p>
         <div>
           <p class="tile__title">Market-entry roadshow: Indian startups into New Jersey</p>
-          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/ta.png" alt="T&amp;A Consulting" loading="lazy"></span><span class="cred__txt">New Jersey Economic Development Authority</span></p>
           <span class="tile__n">150+ Indian startups identified</span>
           <p class="tile__q">Which Indian startups have a real market in New Jersey, and would want to set up operations there?</p>
         </div>
@@ -639,9 +652,9 @@ footer{border-color:var(--line)}
 
       <button class="tile tile--pump" type="button" data-t="sell">
         <div class="tile__top"><span class="tile__tag">Sales &amp; BD</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <p class="tile__sub cred tile__logo"><span class="cred__mark"><img src="logos/gsf.png" alt="GSF" loading="lazy"></span></p>
         <div>
           <p class="tile__title">Investor network build for an early-stage VC programme</p>
-          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/gsf.png" alt="GSF" loading="lazy"></span><span class="cred__txt">In-house · Early-stage VC</span></p>
           <span class="tile__n">1,000+ investor database</span>
           <p class="tile__q">How do you fill a programme and build a network from nothing?</p>
         </div>
@@ -655,9 +668,9 @@ footer{border-color:var(--line)}
 
       <button class="tile tile--lime" type="button" data-t="bet">
         <div class="tile__top"><span class="tile__tag">Investing</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <p class="tile__sub cred tile__logo"><span class="cred__mark"><img src="logos/gsf.png" alt="GSF" loading="lazy"></span></p>
         <div>
           <p class="tile__title">Deal screening for consumer tech startups</p>
-          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/gsf.png" alt="GSF" loading="lazy"></span><span class="cred__txt">Deal screening · Consumer tech</span></p>
           <span class="tile__n">200+ startups screened</span>
           <p class="tile__q">Of 200 companies, which 10 deserve a meeting, and why?</p>
         </div>
@@ -670,10 +683,10 @@ footer{border-color:var(--line)}
       </button>
 
       <button class="tile tile--void" type="button" data-t="own">
-        <div class="tile__top"><span class="tile__tag">Build systems or processes</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <div class="tile__top"><span class="tile__tag">Systems built</span><span class="tile__arrow" aria-hidden="true">↗</span></div>
+        <p class="tile__sub cred tile__logo"><span class="cred__mark"><img src="logos/tresvista.png" alt="TresVista" loading="lazy"></span></p>
         <div>
           <p class="tile__title">Performance variance analysis for a private credit portfolio</p>
-          <p class="tile__sub cred"><span class="cred__mark"><img src="logos/tresvista.png" alt="TresVista" loading="lazy"></span><span class="cred__txt">Client project · Private credit</span></p>
           <span class="tile__n">USD 10 Bn portfolio covered</span>
           <p class="tile__q">The number changed. What changed it, and by how much?</p>
         </div>
@@ -691,7 +704,7 @@ footer{border-color:var(--line)}
 </div>
 
 <!-- ============ ARTEFACTS ============ -->
-<div class="band band--raised">
+<div class="band band--raised" id="ai">
   <div class="wrap">
     <p class="eyebrow">Built with AI</p>
     <h2 style="margin-top:0.7rem">Things I&rsquo;ve built with <span>AI</span></h2>
@@ -891,7 +904,7 @@ footer{border-color:var(--line)}
   }
 
   /* ---------- filter ---------- */
-  var chips = Array.prototype.slice.call(document.querySelectorAll(".chip"));
+  var chips = Array.prototype.slice.call(document.querySelectorAll(".chip[data-f]"));
   var tiles = Array.prototype.slice.call(document.querySelectorAll(".tile"));
   var empty = document.getElementById("empty");
   chips.forEach(function(chip){
