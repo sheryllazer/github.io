@@ -446,6 +446,17 @@ html{scroll-behavior:smooth}
 </style>
 </head>
 <body>
+<script>
+/* Always open at the top: ignore remembered scroll position and any #anchor in the shared link */
+(function(){
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+  function top(){ window.scrollTo(0, 0); }
+  top();
+  window.addEventListener("load", top);
+  window.addEventListener("pageshow", function(e){ if (e.persisted) top(); });
+})();
+</script>
 <!-- ============ HERO ============ -->
 <div class="band band--dots">
   <div class="wrap">
@@ -1001,6 +1012,16 @@ html{scroll-behavior:smooth}
       dismissed=true; vid.pause(); sync();
     });
   })();
+
+  /* ---------- in-page links (no #anchor in the URL) ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll('a[href^="#"]'), function(a){
+    a.addEventListener("click", function(e){
+      var id = a.getAttribute("href").slice(1), el = id && document.getElementById(id);
+      if (!el) return;
+      e.preventDefault();
+      el.scrollIntoView({behavior: reduce ? "auto" : "smooth", block: "start"});
+    });
+  });
 
   /* ---------- copy ---------- */
   function wireCopy(btnId, srcId, label){
