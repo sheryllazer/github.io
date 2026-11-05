@@ -151,20 +151,29 @@ button{font:inherit;color:inherit}
 #me{width:200px;height:360px;top:384px}
 #dog{width:240px;height:200px;top:540px}
 .chr svg{display:block;overflow:visible}
-.lg1,.lg2,.arm1,.arm2,.dl1,.dl2{transform-box:fill-box;transform-origin:50% 0}
+.lg1,.lg2,.arm1,.arm2{transform-box:fill-box;transform-origin:50% 0}
+.dl1,.dl2{transform-box:fill-box}
 .walking .lg1,.walking .arm2{animation:sw .5s ease-in-out infinite alternate}
 .walking .lg2,.walking .arm1{animation:sw .5s ease-in-out infinite alternate-reverse}
 @keyframes sw{from{transform:rotate(-13deg)}to{transform:rotate(13deg)}}
 #me.walking svg{animation:bob .25s ease-in-out infinite alternate}
 @keyframes bob{to{transform:translateY(-4px)}}
 #me.pick .arm2{animation:none;transform:rotate(-160deg);transition:transform .3s}
-.walking .dl1{animation:dsw .26s ease-in-out infinite alternate}
-.walking .dl2{animation:dsw .26s ease-in-out infinite alternate-reverse}
-.running .dl1{animation-duration:.13s}.running .dl2{animation-duration:.13s}
-@keyframes dsw{from{transform:rotate(-18deg)}to{transform:rotate(18deg)}}
-#dog.walking .dbody{animation:bob .13s ease-in-out infinite alternate}
-.dtail{transform-box:fill-box;transform-origin:20% 90%;animation:wag .3s ease-in-out infinite alternate}
-@keyframes wag{from{transform:rotate(-10deg)}to{transform:rotate(14deg)}}
+.walking .dl1{animation:paw .18s ease-in-out infinite alternate}
+.walking .dl2{animation:paw .18s ease-in-out infinite alternate-reverse}
+.running .dl1,.running .dl2{animation-duration:.1s}
+@keyframes paw{from{transform:translate(-7px,0)}50%{transform:translate(0,-4px)}to{transform:translate(7px,0)}}
+#dog.walking .dbody{animation:bob .09s ease-in-out infinite alternate}
+.skirt{transform-box:fill-box;transform-origin:50% 0}
+#dog.walking .skirt{animation:sway .18s ease-in-out infinite alternate}
+@keyframes sway{from{transform:skewX(-4deg)}to{transform:skewX(4deg)}}
+.dtail{transform-box:fill-box;transform-origin:30% 100%;animation:wag .45s ease-in-out infinite alternate}
+#dog.walking .dtail{animation-duration:.18s}
+@keyframes wag{from{transform:rotate(-7deg)}to{transform:rotate(9deg)}}
+.dhead{transform-box:view-box;transform-origin:80px 100px;transition:transform .35s}
+#dog.look .dhead{transform:rotate(10deg)}
+.tng{transform-box:fill-box;transform-origin:50% 0;animation:pant .35s ease-in-out infinite alternate}
+@keyframes pant{to{transform:scaleY(1.12)}}
 .bub{position:absolute;top:-58px;left:50%;transform:translateX(-50%);background:var(--cream);border:3px solid var(--ink);border-radius:14px;padding:8px 12px;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.04em;white-space:nowrap;opacity:0;transition:opacity .25s}
 .bub::after{content:"";position:absolute;left:50%;bottom:-11px;width:16px;height:16px;background:var(--cream);border-right:3px solid var(--ink);border-bottom:3px solid var(--ink);transform:translateX(-50%) rotate(45deg)}
 .bub.on{opacity:1}
@@ -248,7 +257,7 @@ button{font:inherit;color:inherit}
   <div class="card">
     <span class="k">Welcome to</span>
     <h1>Sheryl&rsquo;s <i>Mart</i></h1>
-    <p>Twenty consumer brands I study, and the projects I&rsquo;ve built. Pick anything up to see what I think.</p>
+    <p>Twenty consumer brands I study, and the projects I&rsquo;ve built. Pick anything up to see what I think. Scooby will show you around.</p>
     <div class="route"><span>Entrance</span><span>Brands</span><span>Projects</span><span>Checkout</span></div>
     <div class="btns">
       <button class="bt" type="button" id="walkin">Walk in</button>
@@ -463,7 +472,7 @@ add(`<div class="receipt" style="left:${x+470}px">
   <div class="row"><span>Brands browsed</span><span>20</span></div>
   <div class="row"><span>Projects</span><span>12</span></div>
   <div class="row"><span>Things built with AI</span><span>4</span></div>
-  <div class="row"><span>Dog pats</span><span>&infin;</span></div><hr>
+  <div class="row"><span>Scooby pats</span><span>&infin;</span></div><hr>
   <div class="row tot"><span>TOTAL DUE</span><span>1 coffee chat</span></div><hr>
   <a href="${CAL}" target="_blank" rel="noopener">Book a coffee chat &#8599;</a>
   <a class="alt" href="mailto:sheryllazer@gmail.com">sheryllazer@gmail.com</a>
@@ -475,7 +484,7 @@ X.end=x+1500; W.style.width=X.end+'px';
 let scen=`<div class="wall" style="left:${X.inside}px;width:${X.end-X.inside}px"></div><div class="floor" style="left:${X.inside}px;width:${X.end-X.inside}px"></div><div class="skirt" style="left:${X.inside}px;width:${X.end-X.inside}px"></div>`;
 for(let lx=X.inside+200;lx<X.end;lx+=520) scen+=`<div class="lamp" style="left:${lx}px"></div>`;
 W.innerHTML=html.replace('<!--SCEN-->',scen)+`
-<div class="chr" id="dog"><span class="bub" id="bark">Woof! Projects are this way &rarr;</span>${dogSVG()}</div>
+<div class="chr" id="dog"><span class="bub" id="bark">Woof! Projects this way &rarr;</span>${dogSVG()}</div>
 <div class="chr" id="me">${meSVG()}</div>`;
 
 /* ---------- characters ---------- */
@@ -501,22 +510,44 @@ function meSVG(){
   </svg>`;
 }
 function dogSVG(){
-  const Wt='#FBF8F1',S='#E7DFCE',S2='#D9CDB6',INK='#111110',PINK='#E58C9A',SH='#CDB78F',SHD='#B79F75';
-  const fl=(cx,cy,rx,ry,n,r,f)=>{let s=`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="${f}"/>`;for(let i=0;i<n;i++){const a=i/n*Math.PI*2;s+=`<circle cx="${(cx+Math.cos(a)*rx).toFixed(1)}" cy="${(cy+Math.sin(a)*ry).toFixed(1)}" r="${r}" fill="${f}"/>`;}return s;};
-  const leg=(x,top,cls,c)=>`<g class="${cls}"><rect x="${x-11}" y="${top}" width="22" height="46" rx="10" fill="${c}"/>${fl(x-2,top+48,13,7,7,5,c)}</g>`;
-  let s=`<svg viewBox="-10 0 250 205" width="240" height="200"><ellipse cx="118" cy="198" rx="92" ry="7" fill="#111110" opacity=".10"/><g class="dbody">`;
-  s+=leg(78,130,'dl2',S)+leg(165,128,'dl1',S);
-  s+=`<g class="dtail">${fl(198,70,22,26,9,11,S)}${fl(190,52,18,16,7,9,Wt)}</g>`;
-  s+=fl(122,118,80,46,18,13,Wt);
-  s+=`<clipPath id="dgc"><path d="M58 92 Q120 70 190 96 L196 140 Q120 160 52 142 Z"/></clipPath><path d="M58 92 Q120 70 190 96 L196 140 Q120 160 52 142 Z" fill="${SH}"/><g clip-path="url(#dgc)" opacity=".9">`;
-  for(let x=40;x<210;x+=22)s+=`<rect x="${x}" y="60" width="5" height="110" fill="${INK}" opacity=".55"/><rect x="${x+8}" y="60" width="2" height="110" fill="${Wt}" opacity=".8"/>`;
-  for(let y=78;y<160;y+=20)s+=`<rect x="40" y="${y}" width="170" height="5" fill="${INK}" opacity=".45"/><rect x="40" y="${y+8}" width="170" height="2" fill="${Wt}" opacity=".8"/>`;
-  s+=`</g><path d="M58 92 Q120 70 190 96" stroke="${SHD}" stroke-width="5" fill="none" stroke-linecap="round"/>`;
-  s+=leg(70,136,'dl1',Wt)+leg(158,134,'dl2',Wt);
-  s+=fl(56,116,20,26,9,9,Wt)+fl(58,64,42,40,16,11,Wt)+fl(86,84,14,32,10,8,S)+fl(62,30,22,10,9,8,Wt)+fl(24,82,22,16,10,7,Wt);
-  s+=`<ellipse cx="44" cy="62" rx="6.5" ry="7.5" fill="${INK}"/><circle cx="42" cy="59.5" r="2" fill="#fff"/><path d="M34 52 q9 -6 18 0" stroke="${S2}" stroke-width="3" fill="none" stroke-linecap="round"/>`;
-  s+=`<ellipse cx="6" cy="74" rx="11" ry="9" fill="${INK}"/><ellipse cx="3" cy="71" rx="3.5" ry="2.2" fill="#fff" opacity=".35"/>`;
-  s+=`<path d="M10 90 q4 26 18 22 q10 -4 4 -24 z" fill="${PINK}"/><path d="M20 94 l3 14" stroke="#C9707F" stroke-width="2"/><path d="M6 86 q14 10 30 2" stroke="${INK}" stroke-width="3" fill="none" stroke-linecap="round"/>`;
+  const C='#F7F0E2',C2='#EADDC4',HN='#D6A96E',HN2='#C08F55',ST='#B98F5C',INK='#111110',PINK='#E58C9A',SH='#CDB78F';
+  // wavy fringe bottom
+  const fringe=(x0,x1,y,amp,step)=>{let d='';for(let x=x0;x<=x1;x+=step){d+=` Q${x+step/2} ${y+amp} ${x+step} ${y}`;}return d;};
+  const strands=(x0,x1,y0,y1,n,c)=>{let s='';for(let i=0;i<n;i++){const x=x0+(x1-x0)*i/(n-1);s+=`<path d="M${x} ${y0} q${(i%2?3:-3)} ${(y1-y0)/2} ${(i%2?-2:2)} ${y1-y0}" stroke="${c}" stroke-width="1.4" fill="none" opacity=".32" stroke-linecap="round"/>`;}return s;};
+  let s=`<svg viewBox="-10 0 250 205" width="240" height="200"><ellipse cx="122" cy="197" rx="88" ry="6" fill="#111110" opacity=".12"/><g class="dbody">`;
+  // far paws
+  s+=`<g class="dl2"><ellipse cx="80" cy="190" rx="13" ry="7" fill="${C2}"/></g><g class="dl1"><ellipse cx="172" cy="190" rx="13" ry="7" fill="${C2}"/></g>`;
+  // tail plume curled over back
+  s+=`<g class="dtail"><path d="M184 106 C218 84 220 32 182 18 C156 10 132 26 140 46 C150 34 176 36 180 58 C184 82 166 94 166 106 Z" fill="${HN}"/><path d="M200 48 C206 70 198 90 186 102" stroke="${C}" stroke-width="4" fill="none" opacity=".5" stroke-linecap="round"/>
+      <path d="M176 32 C162 28 150 36 152 46" stroke="${C}" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <path d="M194 52 C196 70 188 86 180 98" stroke="${HN2}" stroke-width="2" fill="none" opacity=".6"/><path d="M186 40 C192 56 186 76 176 90" stroke="${HN2}" stroke-width="2" fill="none" opacity=".6"/></g>`;
+  // long skirt of coat
+  s+=`<g class="skirt"><path d="M56 104 Q48 150 52 184 ${fringe(52,192,184,8,14).trim()} Q202 140 196 100 Z" fill="${C}"/>${strands(66,186,132,180,9,ST)}</g>`;
+  // body top with honey saddle
+  s+=`<ellipse cx="126" cy="106" rx="74" ry="36" fill="${C}"/>`;
+  s+=`<path d="M100 82 Q140 70 178 88 Q170 104 140 100 Q118 98 100 82Z" fill="${HN}" opacity=".85"/>`;
+  // shirt (cape-style on back)
+  s+=`<clipPath id="dgc"><path d="M66 92 Q126 64 190 90 L192 124 Q126 136 62 124 Z"/></clipPath><path d="M66 92 Q126 64 190 90 L192 124 Q126 136 62 124 Z" fill="${SH}"/><g clip-path="url(#dgc)" opacity=".9">`;
+  for(let x=50;x<210;x+=22)s+=`<rect x="${x}" y="60" width="5" height="90" fill="${INK}" opacity=".5"/><rect x="${x+8}" y="60" width="2" height="90" fill="${C}" opacity=".8"/>`;
+  for(let y=76;y<140;y+=18)s+=`<rect x="50" y="${y}" width="160" height="5" fill="${INK}" opacity=".42"/><rect x="50" y="${y+8}" width="160" height="2" fill="${C}" opacity=".8"/>`;
+  s+=`</g><path d="M66 92 Q126 64 190 90" stroke="#B79F75" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+  // near paws peeking
+  s+=`<g class="dl1"><ellipse cx="70" cy="191" rx="14" ry="7.5" fill="${C}"/></g><g class="dl2"><ellipse cx="160" cy="191" rx="14" ry="7.5" fill="${C}"/></g>`;
+  // head group
+  s+=`<g class="dhead">
+   <path d="M30 96 Q34 140 54 150 Q70 130 76 104 Z" fill="${C}"/>${strands(38,70,108,146,6,ST)}
+   <circle cx="62" cy="66" r="40" fill="${C}"/>
+   <path d="M34 40 Q50 18 74 24 Q94 30 98 48 Q80 34 62 38 Q46 40 34 40Z" fill="${C2}"/>
+   <path d="M84 44 Q110 52 108 96 Q110 130 98 146 Q92 138 86 146 Q76 130 78 96 Q76 66 84 44Z" fill="${HN}"/>
+   ${strands(84,104,70,140,5,HN2)}
+   <ellipse cx="28" cy="88" rx="26" ry="18" fill="${C}"/>
+   <path d="M6 96 Q16 122 30 120 Q44 122 52 100" fill="${C}"/>
+   <ellipse cx="46" cy="62" rx="7.5" ry="8.5" fill="${INK}"/><circle cx="43.5" cy="59" r="2.4" fill="#fff"/>
+   <path d="M34 50 q10 -8 22 -2 M38 46 l4 -8 M46 45 l2 -9 M54 47 l1 -8" stroke="${C2}" stroke-width="3" fill="none" stroke-linecap="round"/>
+   <ellipse cx="9" cy="80" rx="11" ry="9" fill="${INK}"/><ellipse cx="6" cy="77" rx="3.5" ry="2.2" fill="#fff" opacity=".35"/>
+   <path class="tng" d="M14 96 q4 24 17 21 q10 -4 4 -23 z" fill="${PINK}"/><path d="M23 99 l3 12" stroke="#C9707F" stroke-width="2"/>
+   <path d="M8 92 q14 9 30 2" stroke="${INK}" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>`;
   return s+`</g></svg>`;
 }
 
@@ -534,21 +565,24 @@ function size(){
 }
 const camFor=wx=>Math.max(0,Math.min(maxCam,wx-viewW*0.4));
 const scrollFor=wx=>camFor(wx)*sc;
-let last=0, idle, pickT;
+let last=0, idle, pickT, lastMove=0;
 function frame(){
   const y=scrollY, cam=Math.min(maxCam,y/sc);
   W.style.transform=`translate(${-cam*sc}px,0) scale(${sc})`;
   const cx=Math.min(cam+viewW*0.4, X.checkout+360);
   me.style.transform=`translateX(${cx-100}px)`;
   // dog
-  const RUN=X.projects+120;
-  let d, mode='follow', face=1;
-  if(cx<X.tx0){ d=cx-190; }
+  const RUN=X.projects+120, LEAD=190;
+  let d, mode='lead', face=1;
+  if(cx<X.tx0){ d=cx+LEAD; }
   else{
-    const dr=Math.min((X.tx0-190)+(cx-X.tx0)*4, RUN);
-    if(cx+110>RUN){ d=Math.min(cx+110, X.checkout+170); mode='lead'; }
+    const dr=Math.min((X.tx0+LEAD)+(cx-X.tx0)*4, RUN);
+    if(cx+LEAD>RUN){ d=Math.min(cx+LEAD, X.checkout+170); }
     else { d=dr; mode= dr<RUN?'run':'wait'; if(mode==='wait') face=-1; }
   }
+  const still=Date.now()-lastMove>900;
+  if(mode==='lead' && still && d>cx) face=-1;   // stops and turns back to look up at you
+  dog.classList.toggle('look', still || mode==='wait');
   dog.style.transform=`translateX(${d-120}px) scaleX(${-face})`;
   bark.style.transform=`translateX(-50%) scaleX(${-face})`;
   bark.classList.toggle('on',mode==='run'||mode==='wait');
@@ -557,7 +591,7 @@ function frame(){
   const zone=cx<X.inside?'entrance':cx<X.tx0+300?'brands':cx<X.checkout-200?'projects':'checkout';
   document.querySelectorAll('.map button').forEach(b=>b.classList.toggle('on',b.dataset.go===zone));
   if(Math.abs(y-last)>0.5){
-    me.classList.add('walking'); dog.classList.add('walking');
+    lastMove=Date.now(); me.classList.add('walking'); dog.classList.add('walking');
     clearTimeout(idle); idle=setTimeout(()=>{me.classList.remove('walking');dog.classList.remove('walking');},140);
   }
   last=y;
@@ -568,7 +602,7 @@ addEventListener('scroll',()=>requestAnimationFrame(frame),{passive:true});
 addEventListener('resize',size);
 size();
 // keep dog walking anim while running even when user stops
-setInterval(()=>{if(dog.classList.contains('running'))dog.classList.add('walking');},120);
+setInterval(()=>{if(dog.classList.contains('running'))dog.classList.add('walking');frame();},300);
 
 const go=k=>{
   const target={entrance:0,brands:X.brands+300,projects:X.projects+260,checkout:X.checkout+380}[k];
