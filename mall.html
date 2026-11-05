@@ -538,7 +538,7 @@ let last=0, idle, pickT;
 function frame(){
   const y=scrollY, cam=Math.min(maxCam,y/sc);
   W.style.transform=`translate(${-cam*sc}px,0) scale(${sc})`;
-  const cx=Math.min(cam+viewW*0.4, X.end-260);
+  const cx=Math.min(cam+viewW*0.4, X.checkout+360);
   me.style.transform=`translateX(${cx-100}px)`;
   // dog
   const RUN=X.projects+120;
@@ -546,7 +546,7 @@ function frame(){
   if(cx<X.tx0){ d=cx-190; }
   else{
     const dr=Math.min((X.tx0-190)+(cx-X.tx0)*4, RUN);
-    if(cx+110>RUN){ d=cx+110; mode='lead'; }
+    if(cx+110>RUN){ d=Math.min(cx+110, X.checkout+170); mode='lead'; }
     else { d=dr; mode= dr<RUN?'run':'wait'; if(mode==='wait') face=-1; }
   }
   dog.style.transform=`translateX(${d-120}px) scaleX(${-face})`;
