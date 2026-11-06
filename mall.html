@@ -600,7 +600,7 @@ function frame(){
   if(cx<X.tx0){ d=cx+LEAD; }
   else{
     const dr=Math.min((X.tx0+LEAD)+(cx-X.tx0)*4, RUN);
-    if(cx+LEAD>RUN){ d=Math.min(cx+LEAD, X.checkout+170); }
+    if(cx+LEAD>RUN){ d=cx+LEAD; }
     else { d=dr; mode= dr<RUN?'run':'wait'; if(mode==='wait') face=-1; }
   }
   const still=Date.now()-lastMove>900;
