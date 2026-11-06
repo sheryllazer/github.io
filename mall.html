@@ -236,13 +236,39 @@ button{font:inherit;color:inherit}
 .m__go{align-self:flex-start}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* about intro (pulls back into the mall) */
+#about{position:fixed;inset:0;z-index:16;overflow:hidden;background:#B9C6B4;color:var(--ink);will-change:opacity}
+#about.gone{visibility:hidden}
+#about .grain{position:absolute;inset:-50%;opacity:.35;mix-blend-mode:multiply;pointer-events:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .1  0 0 0 0 .2  0 0 0 0 .15  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");animation:grain .9s steps(4) infinite}
+@keyframes grain{25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}}
+#about .stage{position:absolute;left:50%;bottom:0;width:min(104vh,980px);transform-origin:50% 100%;will-change:transform}
+#about .stage svg{display:block;width:100%;height:auto}
+#about .corner{position:absolute;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(17,17,16,.72);line-height:1.6}
+#about .tl{left:max(18px,3vw);top:22px}
+#about .tl b{display:block;font-family:var(--body);font-weight:600;font-size:14px;letter-spacing:.02em;text-transform:none;color:var(--ink)}
+#about .tr{right:max(18px,3vw);top:22px;text-align:right}
+#about .bl{left:max(18px,3vw);bottom:22px}
+#about .vr{right:max(10px,2vw);top:50%;transform:translateY(-50%) rotate(90deg);transform-origin:center;white-space:nowrap}
+#about .copy{position:absolute;left:50%;bottom:clamp(18px,3.5vh,40px);transform:translateX(-50%);width:min(640px,calc(100% - 36px));text-align:center;z-index:3;will-change:transform,opacity}
+#about h1{margin:0;font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(52px,8vw,104px);line-height:.9;letter-spacing:-0.01em;color:var(--cream);text-shadow:0 2px 0 rgba(17,17,16,.12)}
+#about .copy p{margin:14px auto 0;max-width:46ch;font-size:clamp(14px,1.6vw,16.5px);line-height:1.55;color:var(--cream);text-shadow:0 1px 10px rgba(17,17,16,.45)}
+#about .cue{margin-top:16px;display:inline-flex;flex-direction:column;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--cream)}
+#about .cue i{display:block;width:1.5px;height:26px;background:linear-gradient(var(--cream),transparent);animation:cue 1.6s ease-in-out infinite}
+@keyframes cue{0%{transform:scaleY(.2);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(.2);transform-origin:bottom}}
+#about .shade{position:absolute;left:0;right:0;bottom:0;height:40%;background:linear-gradient(transparent,rgba(17,17,16,.42));pointer-events:none;z-index:2}
+.blink{transform-box:fill-box;transform-origin:50% 50%;animation:blink 5s infinite}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}
+.hud{transition:opacity .3s}
+.hud.pre{opacity:0;pointer-events:none}
+@media (max-width:700px){#about .vr{display:none}#about .stage{width:150vw}#scoob{right:17%!important;width:30%!important;bottom:0!important}}
 </style>
 </head>
 <body>
 <div id="track"></div>
 <div id="view" aria-hidden="false"><div id="world"></div></div>
 
-<header class="hud">
+<header class="hud pre" id="hud">
   <a href="./">&larr; Classic site</a>
   <nav class="map" aria-label="Jump to">
     <button data-go="entrance" class="on"><i></i><b>Entrance</b></button><span class="ln"></span>
@@ -253,17 +279,18 @@ button{font:inherit;color:inherit}
   <button class="skip" data-go="projects" type="button">Skip to projects</button>
 </header>
 
-<div id="intro">
-  <div class="card">
-    <span class="k">Welcome to</span>
-    <h1>Sheryl&rsquo;s <i>Mart</i></h1>
-    <p>Twenty consumer brands I study, and the projects I&rsquo;ve built. Pick anything up to see what I think. Scooby will show you around.</p>
-    <div class="route"><span>Entrance</span><span>Brands</span><span>Projects</span><span>Checkout</span></div>
-    <div class="btns">
-      <button class="bt" type="button" id="walkin">Walk in</button>
-      <button class="bt bt--o" type="button" data-go="projects">Skip to projects</button>
-    </div>
-    <small>Scroll to walk &middot; click anything on a shelf</small>
+<div id="about" aria-label="About Sheryl">
+  <div class="stage" id="stage"></div>
+  <div class="shade"></div>
+  <div class="grain"></div>
+  <div class="corner tl"><b>Sheryl Lazer</b>Generalist &middot; Consumer</div>
+  <div class="corner tr">Portfolio &mdash; 2026</div>
+  <div class="corner bl">Brands &middot; Projects &middot; Coffee</div>
+  <div class="corner vr">Based in Delhi, India</div>
+  <div class="copy" id="aboutCopy">
+    <h1>About Sheryl</h1>
+    <p>I&rsquo;m Sheryl. Three years on the investor&rsquo;s side of the table, working out which brands win and why. Now I want to be on yours.</p>
+    <span class="cue">Scroll to enter the mall<i></i></span>
   </div>
 </div>
 <div class="scrollhint gone" id="hint">Scroll to walk &rarr;</div>
@@ -551,23 +578,58 @@ function dogSVG(){
   return s+`</g></svg>`;
 }
 
+
+function portraitSVG(){
+  const SK='#B9805C',SKD='#A06A49',HR='#1E1712',INK='#111110',CR='#FBF8F1';
+  return `<svg viewBox="0 0 600 640" xmlns="http://www.w3.org/2000/svg">
+  <path d="M120 300 Q100 120 300 96 Q500 120 482 300 Q498 470 470 560 L130 560 Q102 470 120 300Z" fill="${HR}"/>
+  <path d="M60 640 Q70 520 190 488 Q240 474 300 474 Q360 474 410 488 Q530 520 540 640Z" fill="${INK}"/>
+  <path d="M256 400 L256 488 Q300 520 344 488 L344 400Z" fill="${SKD}"/>
+  <path d="M244 478 Q300 520 356 478" stroke="${SK}" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <ellipse cx="176" cy="306" rx="22" ry="34" fill="${SKD}"/><ellipse cx="424" cy="306" rx="22" ry="34" fill="${SKD}"/>
+  <circle cx="178" cy="346" r="9" fill="#D9B26A"/><circle cx="422" cy="346" r="9" fill="#D9B26A"/>
+  <ellipse cx="300" cy="290" rx="124" ry="148" fill="${SK}"/>
+  <ellipse cx="236" cy="352" rx="26" ry="14" fill="#C9705C" opacity=".28"/><ellipse cx="364" cy="352" rx="26" ry="14" fill="#C9705C" opacity=".28"/>
+  <path d="M168 300 Q150 150 300 136 Q446 146 432 300 Q414 200 330 176 Q300 206 196 236 Q178 262 168 300Z" fill="${HR}"/>
+  <path d="M172 290 Q160 420 196 520 Q150 470 146 380Z" fill="${HR}"/><path d="M428 290 Q440 420 404 520 Q452 470 456 380Z" fill="${HR}"/>
+  <path d="M222 248 q26 -14 52 -4 M326 244 q26 -10 52 4" stroke="${HR}" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <g class="blink"><ellipse cx="248" cy="290" rx="30" ry="22" fill="${CR}"/><ellipse cx="352" cy="290" rx="30" ry="22" fill="${CR}"/>
+   <g id="pupils"><circle cx="248" cy="291" r="15" fill="#3A2416"/><circle cx="248" cy="291" r="8" fill="${INK}"/><circle cx="242" cy="285" r="4.5" fill="#fff"/>
+   <circle cx="352" cy="291" r="15" fill="#3A2416"/><circle cx="352" cy="291" r="8" fill="${INK}"/><circle cx="346" cy="285" r="4.5" fill="#fff"/></g></g>
+  <path d="M218 280 q30 -22 60 0 M322 280 q30 -22 60 0" stroke="${HR}" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M300 306 Q292 340 286 352 Q300 362 314 352" stroke="${SKD}" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M256 386 Q300 420 344 386 Q300 404 256 386Z" fill="#fff"/><path d="M252 384 Q300 426 348 384" stroke="#7A3E2E" stroke-width="6" fill="none" stroke-linecap="round"/>
+  </svg>`;
+}
 /* ---------- camera / scroll ---------- */
 const me=document.getElementById('me'), dog=document.getElementById('dog'), bark=document.getElementById('bark');
-const track=document.getElementById('track'), intro=document.getElementById('intro'), hint=document.getElementById('hint');
-let sc=1, viewW=1200, maxCam=0, charMax=0;
+const about=document.getElementById('about'), stage=document.getElementById('stage'), aboutCopy=document.getElementById('aboutCopy'), hud=document.getElementById('hud');
+stage.innerHTML=portraitSVG()+`<div id="scoob" style="position:absolute;right:-30%;bottom:-2%;width:46%">${dogSVG().replace('class="dbody"','class="dbody"').replace('width="240" height="200"','width="100%" height="auto"')}</div>`;
+const pupils=document.getElementById('pupils');
+function lookAt(px,py){const r=stage.getBoundingClientRect();const ex=r.left+r.width*0.5, ey=r.top+r.height*(290/640);const dx=px-ex, dy=py-ey;const m=Math.hypot(dx,dy)||1;const k=Math.min(1,m/400);pupils.setAttribute('transform',`translate(${(dx/m*9*k).toFixed(2)} ${(dy/m*6*k).toFixed(2)})`);}
+addEventListener('pointermove',e=>lookAt(e.clientX,e.clientY),{passive:true});
+let t0=0;(function idleLook(){t0+=0.02;if(!matchMedia('(hover:hover)').matches){const r=stage.getBoundingClientRect();lookAt(r.left+r.width*(0.5+0.4*Math.sin(t0)),r.top+r.height*0.4);}requestAnimationFrame(idleLook);})();
+const track=document.getElementById('track'), hint=document.getElementById('hint');
+let sc=1, viewW=1200, maxCam=0, charMax=0, INTRO=900;
 function size(){
   sc=Math.max(0.62,Math.min(1.25,innerHeight/H));
   viewW=innerWidth/sc;
   maxCam=X.end-viewW;
-  track.style.height=(innerHeight+maxCam*sc)+'px';
+  INTRO=Math.round(innerHeight*1.1);
+  track.style.height=(innerHeight+INTRO+maxCam*sc)+'px';
   W.style.top=Math.max(0,(innerHeight-H*sc))+'px';
   frame();
 }
 const camFor=wx=>Math.max(0,Math.min(maxCam,wx-viewW*0.4));
-const scrollFor=wx=>camFor(wx)*sc;
+const scrollFor=wx=>INTRO+camFor(wx)*sc;
 let last=0, idle, pickT, lastMove=0;
 function frame(){
-  const y=scrollY, cam=Math.min(maxCam,y/sc);
+  const raw=scrollY, y=Math.max(0,raw-INTRO), cam=Math.min(maxCam,y/sc);
+  const p=Math.min(1,raw/INTRO);
+  stage.style.transform=`translateX(-50%) translateY(${p*14}%) scale(${1-p*0.42})`;
+  aboutCopy.style.transform=`translateX(-50%) translateY(${-p*60}px)`; aboutCopy.style.opacity=String(Math.max(0,1-p*1.8));
+  about.style.opacity=String(p<0.55?1:Math.max(0,1-(p-0.55)/0.4));
+  about.classList.toggle('gone',p>=0.98); hud.classList.toggle('pre',p<0.9);
   W.style.transform=`translate(${-cam*sc}px,0) scale(${sc})`;
   const cx=Math.min(cam+viewW*0.4, X.checkout+360);
   me.style.transform=`translateX(${cx-100}px)`;
@@ -595,8 +657,7 @@ function frame(){
     clearTimeout(idle); idle=setTimeout(()=>{me.classList.remove('walking');dog.classList.remove('walking');},140);
   }
   last=y;
-  intro.classList.toggle('gone',y>30);
-  if(y>30) hint.classList.add('gone');
+  if(y>30) hint.classList.add('gone'); else if(p>=0.98 && y<5) hint.classList.remove('gone');
 }
 addEventListener('scroll',()=>requestAnimationFrame(frame),{passive:true});
 addEventListener('resize',size);
@@ -605,12 +666,10 @@ size();
 setInterval(()=>{if(dog.classList.contains('running'))dog.classList.add('walking');frame();},300);
 
 const go=k=>{
-  const target={entrance:0,brands:X.brands+300,projects:X.projects+260,checkout:X.checkout+380}[k];
-  scrollTo({top:scrollFor(target),behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
+  const target={entrance:-1,brands:X.brands+300,projects:X.projects+260,checkout:X.checkout+380}[k];
+  scrollTo({top:target<0?INTRO:scrollFor(target),behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
 };
 document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
-document.getElementById('walkin').addEventListener('click',()=>{intro.classList.add('gone');hint.classList.remove('gone');scrollTo({top:scrollFor(X.brands+300),behavior:'smooth'});});
-setTimeout(()=>{if(scrollY<30)hint.classList.remove('gone')},1800);
 // keyboard: arrows walk
 addEventListener('keydown',e=>{
   if(document.getElementById('modal').classList.contains('on'))return;
